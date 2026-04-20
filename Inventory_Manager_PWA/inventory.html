@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/pages/inventory.css">
 </head>
 <body>
-
     <main class="app-container inventory-container">
         
         <header class="top-header">
@@ -51,67 +50,8 @@
                 <div class="filter-pill-orange">All Material &times;</div>
             </div>
 
-            <div id="view-location" style="display: grid;" class="location-grid">
-                <div class="loc-card highlighted">
-                    <div class="loc-header">Speaker Mesh Grille<br><span class="loc-sub">Acoustic Material</span></div>
-                    <div class="loc-qty">190<br><span class="loc-units">Units</span></div>
-                    <div class="loc-footer"><span>RN: B-3</span><span>SN: 3</span></div>
-                </div>
-                <div class="loc-card">
-                    <div class="loc-header">Speaker Mesh Grille<br><span class="loc-sub">Acoustic Material</span></div>
-                    <div class="loc-qty">190<br><span class="loc-units">Units</span></div>
-                    <div class="loc-footer"><span>RN: B-3</span><span>SN: 3</span></div>
-                </div>
-                <div class="loc-card">
-                    <div class="loc-header">Speaker Mesh Grille<br><span class="loc-sub">Acoustic Material</span></div>
-                    <div class="loc-qty">190<br><span class="loc-units">Units</span></div>
-                    <div class="loc-footer"><span>RN: B-3</span><span>SN: 3</span></div>
-                </div>
-                <div class="loc-card">
-                    <div class="loc-header">Speaker Mesh Grille<br><span class="loc-sub">Acoustic Material</span></div>
-                    <div class="loc-qty">190<br><span class="loc-units">Units</span></div>
-                    <div class="loc-footer"><span>RN: B-3</span><span>SN: 3</span></div>
-                </div>
-            </div>
-
-            <div id="view-stock" style="display: none;" class="stock-list">
-                
-                <div class="stock-card" onclick="window.location.href='item-detail.html'">
-                    <div class="stock-header">
-                        <div class="stock-title-area">
-                            <h3>Speaker Mesh Grille</h3>
-                            <p>Acoustic Material</p>
-                        </div>
-                        <span class="status-badge status-active">Adequate</span>
-                    </div>
-                    <div class="stock-qty-center">190<br><span>Units</span></div>
-                    <div class="stock-footer"><span>Rack Number: B-3</span><span>Shelf Number: 3</span></div>
-                </div>
-
-                <div class="stock-card" onclick="window.location.href='item-detail.html'">
-                    <div class="stock-header">
-                        <div class="stock-title-area">
-                            <h3>Silicone Eartips — S/M/L</h3>
-                            <p>Acoustic Material</p>
-                        </div>
-                        <span class="status-badge status-issue">Critically Low</span>
-                    </div>
-                    <div class="stock-qty-center">28<br><span>Units</span></div>
-                    <div class="stock-footer"><span>Rack Number: B-2</span><span>Shelf Number: 3</span></div>
-                </div>
-
-                <div class="stock-card" onclick="window.location.href='item-detail.html'">
-                    <div class="stock-header">
-                        <div class="stock-title-area">
-                            <h3>Internal Wiring Harness</h3>
-                            <p>Acoustic Material</p>
-                        </div>
-                        <span class="status-badge status-hold">Getting Low</span>
-                    </div>
-                    <div class="stock-qty-center">55<br><span>Units</span></div>
-                    <div class="stock-footer"><span>Rack Number: B-2</span><span>Shelf Number: 3</span></div>
-                </div>
-            </div>
+            <div id="view-location" style="display: grid;" class="location-grid"></div>
+            <div id="view-stock" style="display: none;" class="stock-list"></div>
 
             <div class="footer-copy">IM@2026</div>
             <div style="height: 100px;"></div>
@@ -128,36 +68,11 @@
 
     </main>
 
-    <script>
-        // Check URL on load to see if we should open the Stock tab
-        document.addEventListener("DOMContentLoaded", () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('tab') === 'stock') {
-                switchTab('stock');
-            }
-        });
-
-        function switchTab(tab) {
-            const locView = document.getElementById('view-location');
-            const stockView = document.getElementById('view-stock');
-            const btnLoc = document.getElementById('btn-location');
-            const btnStock = document.getElementById('btn-stock');
-            const title = document.getElementById('inventory-title');
-
-            if (tab === 'location') {
-                locView.style.display = 'grid';
-                stockView.style.display = 'none';
-                btnLoc.classList.add('active');
-                btnStock.classList.remove('active');
-                title.innerText = 'Check Location';
-            } else {
-                locView.style.display = 'none';
-                stockView.style.display = 'flex';
-                btnStock.classList.add('active');
-                btnLoc.classList.remove('active');
-                title.innerText = 'Stock Inventory';
-            }
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/data-service.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/pages/inventory.js"></script>
 </body>
 </html>

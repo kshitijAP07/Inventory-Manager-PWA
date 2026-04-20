@@ -2,7 +2,6 @@
 IMAuth.requireAuth(['inventory_manager'], '../index.html');
 
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Grab the ID from the URL
     const urlParams = new URLSearchParams(window.location.search);
     const itemId = urlParams.get('id');
 
@@ -12,7 +11,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    // 2. Fetch the specific item from Supabase
     const item = await IMData.getInventoryItemById(itemId);
 
     if (!item) {
@@ -21,13 +19,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    // 3. Inject the Core Data
+    // 1. Header & Main Card
     document.getElementById('detail-name').textContent = item.name;
     document.getElementById('detail-category').textContent = item.category;
     document.getElementById('detail-qty').textContent = item.quantity;
-    document.getElementById('detail-units').textContent = item.unit;
+    document.getElementById('detail-units').textContent = item.unit.charAt(0).toUpperCase() + item.unit.slice(1);
 
-    // 4. Handle Status Badge Styling
+    // 2. Status Badge Logic
     const statusEl = document.getElementById('detail-status');
     if (item.stock_status === 'critical' || item.stock_status === 'out_of_stock') {
         statusEl.className = 'status-badge status-issue';
@@ -40,27 +38,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         statusEl.textContent = 'Adequate';
     }
 
-    // 5. Inject Stock Details
-    document.getElementById('det-qty').textContent = `${item.quantity} ${item.unit}`;
-    document.getElementById('det-min').textContent = `${item.min_threshold} ${item.unit}`;
-    document.getElementById('det-max').textContent = `${item.max_capacity} ${item.unit}`;
+    // 3. Stock Details Section
+    document.getElementById('det-qty').textContent = `${item.quantity} ${item.unit.charAt(0).toUpperCase() + item.unit.slice(1)}`;
+    document.getElementById('det-min').textContent = `${item.min_threshold} ${item.unit.charAt(0).toUpperCase() + item.unit.slice(1)}`;
+    document.getElementById('det-max').textContent = `${item.max_capacity} ${item.unit.charAt(0).toUpperCase() + item.unit.slice(1)}`;
     
     // Parse JSONB location safely
     const rack = item.location?.rack || 'N/A';
     const shelf = item.location?.shelf || 'N/A';
     const locString = `Rack ${rack} Shelf ${shelf}`;
     document.getElementById('det-loc1').textContent = locString;
-    document.getElementById('det-loc2').textContent = locString;
 
-    // Format Dates & Arrays
-    document.getElementById('det-updated').textContent = new Date(item.updated_at).toLocaleDateString();
+    // Formatting Date safely
+    const updatedDate = new Date(item.updated_at);
+    document.getElementById('det-updated').textContent = updatedDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
     document.getElementById('det-updated-by').textContent = Array.isArray(item.last_updated_by) ? item.last_updated_by.join(', ') : 'System';
 
-    // 6. Inject Supplier Info (JSONB)
+    // 4. Where We Bought Section (From JSONB)
     document.getElementById('det-supplier').textContent = item.supplier_info?.name || 'N/A';
     document.getElementById('det-city').textContent = item.supplier_info?.city || 'N/A';
     document.getElementById('det-po').textContent = item.supplier_info?.po || 'N/A';
+    document.getElementById('det-email').textContent = item.supplier_info?.email || 'N/A';
 
-    // 7. Inject Notes
+    // 5. Notes
     document.getElementById('det-notes').textContent = item.storage_notes || 'No specific storage notes available.';
 });

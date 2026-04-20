@@ -6,9 +6,9 @@
     <title>IM - Item Detail</title>
     <link rel="stylesheet" href="css/brand.css">
     <link rel="stylesheet" href="css/core.css">
-    <link rel="stylesheet" href="css/pages/inventory.css"> </head>
+    <link rel="stylesheet" href="css/pages/inventory.css">
+</head>
 <body>
-
     <main class="app-container inventory-container">
         
         <header class="top-header">
@@ -27,57 +27,58 @@
 
         <div class="page-content">
             
-            <div class="detail-sub-header">
-                <div class="back-btn" onclick="window.location.href='inventory.html?tab=stock'">
+            <div class="detail-sub-header" style="align-items: center; margin-bottom: 24px;">
+                <div class="back-btn-orange" onclick="window.location.href='inventory.html?tab=stock'">
                     <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
                 </div>
-                <div class="detail-title-block">
-                    <h2 id="detail-name">Loading...</h2>
-                    <p id="detail-category">...</p>
+                <div class="detail-title-block" style="text-align: center; flex: 1;">
+                    <h2 id="detail-name" style="color: var(--color-primary); font-size: 18px; font-weight: 700;">Loading...</h2>
+                    <p id="detail-category" style="color: #666; font-size: 12px; margin-top: 4px;">...</p>
                 </div>
-                <div class="edit-btn">
+                <div class="edit-btn-orange" style="background-color: var(--color-primary); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
                     <svg viewBox="0 0 24 24" width="16" height="16" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
                 </div>
             </div>
 
-            <div class="main-qty-card">
-                <div class="big-number" id="detail-qty">-</div>
-                <div class="big-units" id="detail-units">Units</div>
-                <span class="status-badge" id="detail-status">...</span>
+            <div class="main-qty-card" style="text-align: center; background: #F5F5F5; border-radius: 16px; padding: 24px; margin: 0 auto 24px auto; width: 140px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                <div class="big-number" id="detail-qty" style="color: var(--color-primary); font-size: 48px; font-weight: 700; line-height: 1;">-</div>
+                <div class="big-units" id="detail-units" style="color: #666; font-size: 12px; margin: 8px 0;">Units</div>
+                <span class="status-badge" id="detail-status" style="display: inline-block;">...</span>
             </div>
 
-            <div class="details-section">
-                <h3>Stock Details</h3>
-                <div class="detail-row"><span class="d-label">Current Quantity</span><span class="d-value" id="det-qty">-</span></div>
-                <div class="detail-row"><span class="d-label">Minimum Threshold</span><span class="d-value" id="det-min">-</span></div>
-                <div class="detail-row"><span class="d-label">Maximum Capacity</span><span class="d-value" id="det-max">-</span></div>
-                <div class="detail-row"><span class="d-label">Storage Location</span><span class="d-value" id="det-loc1">-</span></div>
-                <div class="detail-row"><span class="d-label">Last Updated</span><span class="d-value" id="det-updated">-</span></div>
-                <div class="detail-row"><span class="d-label">Updated By</span><span class="d-value" id="det-updated-by">-</span></div>
+            <div class="details-section" style="background: #F5F5F5; border-radius: 16px; padding: 20px; margin-bottom: 16px;">
+                <h3 style="color: #888; font-size: 13px; font-weight: 700; margin-bottom: 16px;">Stock Details</h3>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px;"><span style="color: #888;">Current Quantity</span><span id="det-qty" style="font-weight: 600; color: #111;">-</span></div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px;"><span style="color: #888;">Minimum Threshold</span><span id="det-min" style="font-weight: 600; color: #111;">-</span></div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px;"><span style="color: #888;">Maximum Capacity</span><span id="det-max" style="font-weight: 600; color: #111;">-</span></div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px;"><span style="color: #888;">Storage Location</span><span id="det-loc1" style="font-weight: 600; color: #111;">-</span></div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px;"><span style="color: #888;">Last Updated</span><span id="det-updated" style="font-weight: 600; color: #111;">-</span></div>
+                <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: #888;">Updated By</span><span id="det-updated-by" style="font-weight: 600; color: #111;">-</span></div>
             </div>
 
-            <div class="details-section">
-                <h3>Where we bought</h3>
-                <div class="detail-row"><span class="d-label">Supplier</span><span class="d-value" id="det-supplier">-</span></div>
-                <div class="detail-row"><span class="d-label">Supplier City</span><span class="d-value" id="det-city">-</span></div>
-                <div class="detail-row"><span class="d-label">PO Number</span><span class="d-value" id="det-po">-</span></div>
-                <div class="detail-row"><span class="d-label">Storage Location</span><span class="d-value" id="det-loc2">-</span></div>
+            <div class="details-section" style="background: #F5F5F5; border-radius: 16px; padding: 20px; margin-bottom: 16px;">
+                <h3 style="color: #888; font-size: 13px; font-weight: 700; margin-bottom: 16px;">Where we bought</h3>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px;"><span style="color: #888;">Supplier</span><span id="det-supplier" style="font-weight: 600; color: #111;">-</span></div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px;"><span style="color: #888;">Supplier Location</span><span id="det-city" style="font-weight: 600; color: #111;">-</span></div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px;"><span style="color: #888;">PO Number</span><span id="det-po" style="font-weight: 600; color: #111;">-</span></div>
+                <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: #888;">Supplier Email</span><span id="det-email" style="font-weight: 600; color: #111;">-</span></div>
             </div>
 
-            <div class="details-section">
-                <h3>Storage & Handling Note</h3>
-                <p class="note-text" id="det-notes">Loading notes...</p>
+            <div class="details-section" style="background: #F5F5F5; border-radius: 16px; padding: 20px; margin-bottom: 24px;">
+                <h3 style="color: #888; font-size: 13px; font-weight: 700; margin-bottom: 12px;">Storage & Handling Note</h3>
+                <p id="det-notes" style="color: #888; line-height: 1.5; font-size: 13px;">Loading notes...</p>
             </div>
 
-            <div class="footer-copy">IM@2026</div>
             <div style="height: 100px;"></div>
         </div>
 
         <nav class="bottom-nav">
+            <div class="nav-item" onclick="window.location.href='im-dashboard.html'"><img src="assets/home-icon.svg" alt="Home"></div>
             <div class="nav-item" onclick="window.location.href='quick-allot.html'"><img src="assets/nav-quick-allot.svg" alt="Quick Allot"></div>
-            <div class="nav-item" onclick="window.location.href='scanned-product.html'"><img src="assets/nav-scan.svg" alt="Scan"></div>
-            <div class="nav-item"><img src="assets/nav-allot-scan.svg" alt="Allot Scan"></div>
-            <div class="nav-item active"><img src="assets/nav-inventory.svg" alt="Inventory"></div>
+            <div class="nav-item" onclick="window.location.href='scanned-product.html'"><img src="assets/nav-scan-box.svg" alt="Scan"></div>
+            <div class="nav-item active" onclick="window.location.href='inventory.html'">
+                <img src="assets/nav-inventory.svg" alt="Inventory" style="filter: brightness(0) invert(1);">
+            </div>
         </nav>
 
     </main>
@@ -85,7 +86,6 @@
     <script src="../js/supabase-config.js"></script>
     <script src="../js/auth.js"></script>
     <script src="../js/data-service.js"></script>
-
     <script src="js/core.js"></script>
     <script src="js/pages/item-detail.js"></script>
 </body>
