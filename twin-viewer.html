@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Model Viewer</title>
+  <meta name="description" content="Interactive 3D GLB model viewer with item selection" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./src/styles/main.css" />
+</head>
+
+<body>
+
+  <div id="loader">
+    <span id="loader-text">Loading model…</span>
+    <div id="loader-bar-wrap">
+      <div id="loader-bar"></div>
+    </div>
+  </div>
+
+  <div id="ui">
+    <span>🖱</span> Left drag — rotate<br>
+    <span>🖱</span> Right drag — pan<br>
+    <span>🖱</span> Scroll — rotate<br>
+    <span>🖱</span> Ctrl + Scroll — zoom<br>
+    <span>👆</span> Click item — show ID
+  </div>
+
+  <div id="info-panel">
+    <div class="label">Item ID</div>
+    <div class="item-id" id="item-id-text">—</div>
+    <div class="item-type" id="item-type-text"></div>
+  </div>
+
+  <div id="wireframe-toggle">
+    <span>Wireframe</span>
+    <div class="toggle-track" id="wireframe-track">
+      <div class="toggle-thumb"></div>
+    </div>
+  </div>
+
+  <button id="move-item-btn">⇄ Move Item</button>
+
+  <div id="move-panel">
+    <div class="panel-title">Move Item</div>
+    <label for="mesh-select">Target Item</label>
+    <select id="mesh-select">
+      <option value="">— loading —</option>
+    </select>
+    <div class="coord-row">
+      <div class="coord-field">
+        <label for="coord-x">X</label>
+        <input type="number" id="coord-x" step="0.1" value="0" />
+      </div>
+      <div class="coord-field">
+        <label for="coord-y">Y</label>
+        <input type="number" id="coord-y" step="0.1" value="0" />
+      </div>
+      <div class="coord-field">
+        <label for="coord-z">Z</label>
+        <input type="number" id="coord-z" step="0.1" value="0" />
+      </div>
+    </div>
+    <button id="move-apply-btn">Apply Position</button>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module" src="./twin-app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IM - Dashboard</title>
+    
+    <link rel="stylesheet" href="css/brand.css">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/pages/im-dashboard.css">
+</head>
+<body>
+
+    <main class="app-container dashboard-container">
+        
+        <header class="top-header">
+            <div class="header-left">
+                <div class="header-logo">
+                    <a href="im-dashboard.html">
+                        <img src="assets/small-logo.svg" alt="Logo" class="logo-img"> 
+                        <span class="logo-text">IM</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <img src="assets/bell-icon.svg" alt="Notifications" class="icon-sm" onclick="window.location.href='im-alerts.html'" style="cursor: pointer;">
+                <button id="logoutBtn" style="background: none; border: none; color: #FF1744; font-weight: 600; cursor: pointer; font-family: inherit; font-size: 14px;">Logout</button>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="time-filters">
+                <button class="filter-btn active">Today</button>
+                <button class="filter-btn">Weekly</button>
+                <button class="filter-btn">Yearly</button>
+            </div>
+
+            <div class="efficiency-container">
+                <div class="efficiency-bar" style="width: 98%;">
+                    <span class="eff-label">Efficiency</span>
+                    <span class="eff-value">98%</span>
+                </div>
+            </div>
+
+            <section class="section-block">
+                <h2 class="section-title">Graph</h2>
+                
+                <select class="dropdown-badge" id="graph-filter">
+                    <option value="workstations">Workstations</option>
+                    <option value="assembly">Assembly Line</option>
+                </select>
+                
+                <div class="graph-container">
+                    <img src="assets/main-graph.svg" alt="Workstation Progress Graph" class="main-graph-img">
+                </div>
+                <p class="graph-subtext">This represents the progress of<br>every individual Workstation.</p>
+            </section>
+
+            <section class="section-block">
+                <h2 class="section-title">Workstations</h2>
+                <div class="cards-grid"></div>
+            </section>
+
+            <section class="section-block">
+                <h2 class="section-title">Assembly Line</h2>
+                <div class="cards-grid"></div>
+            </section>
+            
+            <div style="height: 100px;"></div>
+        </div>
+
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="window.location.href='im-dashboard.html'">
+                <img src="assets/home-icon.svg" alt="Home" style="filter: brightness(0) invert(1);">
+            </div>
+            <div class="nav-item" onclick="window.location.href='quick-allot.html'"><img src="assets/nav-quick-allot.svg" alt="Quick Allot"></div>
+            <div class="nav-item" onclick="window.location.href='scanned-product.html'"><img src="assets/nav-scan-box.svg" alt="Scan"></div>
+            <div class="nav-item" onclick="window.location.href='inventory.html'"><img src="assets/nav-inventory.svg" alt="Inventory"></div>
+        </nav>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/data-service.js"></script>
+
+    <script src="js/core.js"></script>
+    <script src="js/pages/im-dashboard.js"></script>
+</body>
+</html>

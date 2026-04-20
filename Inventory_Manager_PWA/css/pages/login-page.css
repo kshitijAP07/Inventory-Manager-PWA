@@ -1,0 +1,88 @@
+/* =========================================
+   LOGIN PAGE SPECIFIC STYLES
+   ========================================= */
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px; /* Gives nice padding on mobile */
+    background-color: var(--color-background);
+}
+
+/* Brand Section (Logo & Text) */
+.brand-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.main-logo {
+    width: 140px; /* Adjust slightly based on your exact SVG export size */
+    height: auto;
+    margin-bottom: 24px;
+}
+
+.brand-text {
+    font-size: 84px; /* Matches the massive scale in Figma */
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1;
+    margin: 0;
+    letter-spacing: -2px;
+}
+
+/* Form Styles */
+.login-form {
+    width: 100%;
+    max-width: 390px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Space between inputs */
+}
+
+.input-group {
+    width: 100%;
+}
+
+.login-form input {
+    width: 100%;
+    background-color: #F0F0F0; /* Matches Figma light grey */
+    color: var(--color-text-main);
+    padding: 16px 20px;
+    border-radius: var(--radius-input); /* Uses your 8px variable */
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease;
+}
+
+.login-form input::placeholder {
+    color: var(--color-text-muted);
+}
+
+.login-form input:focus {
+    background-color: #E8E8E8; /* Slight darken on focus */
+}
+
+/* Primary Login Button */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 0;
+    border-radius: var(--radius-button); /* Uses your 24px pill shape */
+    margin-top: 16px;
+    width: 50%; /* Makes it pill sized in the center like the design */
+    align-self: center; /* Centers the button inside the flex form */
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 99, 28, 0.2); /* Soft orange glow */
+    transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.btn-primary:active {
+    transform: scale(0.96);
+    background-color: #E55818;
+}

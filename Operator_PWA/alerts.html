@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Operator - Alerts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/brand.css">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/pages/alerts.css">
+</head>
+<body>
+
+    <main class="app-container operator-alerts-container">
+        
+        <header class="top-header">
+            <div class="header-left">
+                <div class="header-logo">
+                    <img src="assets/small-logo.svg" alt="Logo" class="logo-img filter-white"> 
+                    <span class="logo-text">IM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="bell-container">
+                    <svg class="icon-sm active-bell" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 8A6 6 0 0 0 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M13.73 21C13.5542 21.3031 13.3019 21.5547 12.9982 21.7295C12.6946 21.9044 12.3504 21.9965 12 21.9965C11.6496 21.9965 11.3054 21.9044 11.0018 21.7295C10.6982 21.5547 10.4458 21.3031 10.27 21" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <div class="notification-dot"></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-content">
+            
+            <h1 class="page-title">3 Alerts !</h1>
+
+            <div class="alerts-list">
+                
+                <div class="op-alert-card">
+                    <div class="alert-header">
+                        <div class="alert-header-left">
+                            <svg class="warning-icon-yellow" viewBox="0 0 24 24" fill="none" stroke="#FFD600" stroke-width="2.5" stroke-linejoin="round">
+                                <polygon points="12 2 22 9 18 22 6 22 2 9"></polygon>
+                            </svg>
+                            <span class="alert-id">WS-04</span>
+                        </div>
+                        <span class="alert-time">09:55</span>
+                    </div>
+                    <h2 class="alert-name">WS-04 is on Hold</h2>
+                    <p class="alert-desc">28 units remaining · min threshold 80<br>WS-04 Earphone Build is blocked</p>
+                    <div class="alert-actions">
+                        <button class="btn-pill-white">Check Stock &rarr;</button>
+                        <button class="btn-pill-white">Raise Order &rarr;</button>
+                    </div>
+                </div>
+
+                <div class="op-alert-card">
+                    <div class="alert-header">
+                        <div class="alert-header-left">
+                            <svg class="warning-icon-red" viewBox="0 0 24 24" fill="none" stroke="#FF1744" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            </svg>
+                            <span class="alert-id">WS-02</span>
+                        </div>
+                        <span class="alert-time">08:30</span>
+                    </div>
+                    <h2 class="alert-name">Driver Brackets — Critical Low</h2>
+                    <p class="alert-desc">19 units remaining · min threshold 50</p>
+                    <div class="alert-actions">
+                        <button class="btn-pill-white">Inform Inventory Manager &rarr;</button>
+                    </div>
+                </div>
+
+                <div class="op-alert-card">
+                    <div class="alert-header">
+                        <div class="alert-header-left">
+                            <svg class="warning-icon-red" viewBox="0 0 24 24" fill="none" stroke="#FF1744" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            </svg>
+                            <span class="alert-id">AL-01</span>
+                        </div>
+                        <span class="alert-time">10.05</span>
+                    </div>
+                    <h2 class="alert-name">Foam Dampening — Warning</h2>
+                    <p class="alert-desc">55 units · reorder point is 80</p>
+                    <div class="alert-actions">
+                        <button class="btn-pill-white">Raise Order &rarr;</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="height: 120px;"></div> </div>
+
+        <nav class="floating-bottom-nav">
+            <div class="nav-item-inactive" onclick="window.location.href='home.html'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="home-icon-svg">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+            </div>
+        </nav>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/data-service.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/pages/alerts.js"></script>
+</body>
+</html>

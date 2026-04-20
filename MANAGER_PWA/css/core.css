@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-base);
+    background-color: #f0f0f0; 
+    color: var(--color-text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Native Mobile Text Smoothing */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 100%; 
+    min-height: 100vh;
+    background-color: var(--color-background);
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+input, button, select, textarea {
+    font-family: inherit;
+    border: none;
+    outline: none;
+}
+
+/* Dark placeholders globally */
+::placeholder {
+    color: #333333;
+    opacity: 1;
+}
+::-webkit-input-placeholder {
+    color: #333333;
+}
+::-moz-placeholder {
+    color: #333333;
+    opacity: 1;
+}
+:-ms-input-placeholder {
+    color: #333333;
+}
+
+/* =========================================
+   GLOBAL BOTTOM NAVIGATION 
+   ========================================= */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    background-color: var(--color-background);
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 12px 0 24px 0;
+    z-index: 100;
+}
+.nav-item {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F4F4F4;
+    cursor: pointer;
+}
+.nav-item.active {
+    background-color: var(--color-primary);
+    color: white;
+}
+/* This is the magic rule that stops the icons from exploding */
+.nav-item img, .nav-item svg {
+    width: 24px;
+    height: 24px;
+}

@@ -1,0 +1,252 @@
+/* =========================================
+   IM DASHBOARD SPECIFIC STYLES
+   ========================================= */
+
+.dashboard-container {
+    background-color: var(--color-background);
+    padding-bottom: 80px; 
+}
+
+/* Header Adjustments */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px 10px 24px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.logo-img { width: 24px; height: 24px; }
+.logo-text { font-size: 20px; font-weight: 800; color: var(--color-text-main); }
+.icon-sm { width: 20px; height: 20px; cursor: pointer; color: var(--color-text-main); }
+
+/* Dashboard Content Padding */
+.dashboard-content {
+    padding: 0 24px;
+}
+
+/* Time Filters */
+.time-filters {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+
+.filter-btn {
+    background-color: var(--color-dark-gray);
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    background-color: var(--color-primary);
+}
+
+/* Efficiency Bar */
+.efficiency-container {
+    background-color: var(--color-dark-gray);
+    border-radius: 12px;
+    height: 76px;
+    width: 100%;
+    margin-bottom: 32px;
+    overflow: hidden;
+}
+
+.efficiency-bar {
+    background-color: var(--color-primary);
+    height: 100%;
+    border-radius: 12px 0 0 12px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.eff-label {
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.eff-value {
+    color: #FFFFFF;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* Sections */
+.section-block {
+    margin-bottom: 32px;
+}
+
+.section-title {
+    color: var(--color-primary);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* Graph Section */
+/* Updated Graph Section Dropdown */
+.dropdown-badge {
+    appearance: none; /* Removes default browser styling */
+    -webkit-appearance: none;
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    font-size: 10px;
+    font-family: inherit;
+    font-weight: 600;
+    padding: 6px 28px 6px 14px; /* Extra right padding for the arrow */
+    border-radius: 20px; /* Fully round pill shape */
+    margin-bottom: 20px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    
+    /* Custom white dropdown arrow using an inline SVG */
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 12px auto;
+}
+
+.dropdown-badge option {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    font-size: 14px; /* Larger font size for the opened menu so it's readable */
+    border-radius: 0;
+}
+
+.graph-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.main-graph-img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+}
+
+.graph-subtext {
+    text-align: center;
+    font-size: 10px;
+    color: var(--color-text-main);
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+/* Cards Grid */
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.ws-card {
+    background-color: var(--color-light-gray);
+    border-radius: var(--radius-card);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.card-id {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.status-badge {
+    font-size: 7px;
+    font-weight: 700;
+    color: #FFFFFF;
+    padding: 3px 6px;
+    border-radius: 8px;
+}
+
+.status-active { background-color: var(--color-status-active); }
+.status-issue { background-color: var(--color-status-issue); }
+.status-hold { background-color: var(--color-status-hold); color: var(--color-text-main); }
+
+/* Pure CSS Circular Progress Ring */
+.css-progress-ring {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    /* var(--progress) is fed from the inline HTML style (e.g. 324deg = 90%) */
+    background: conic-gradient(var(--color-primary) var(--progress), #E0E0E0 var(--progress));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+/* Inner cutout to make it a ring */
+.css-progress-ring::before {
+    content: "";
+    position: absolute;
+    width: 52px; /* Leaves a 6px border */
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--color-light-gray); /* Match card background */
+}
+
+.progress-value {
+    position: relative;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-text-main);
+    z-index: 1;
+}
+
+.card-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.card-desc {
+    font-size: 9px;
+    color: var(--color-text-main);
+    line-height: 1.2;
+    font-weight: 500;
+}
+
+/* Reusing the general bell icon */
+.card-icon {
+    width: 14px;
+    height: 14px;
+    object-fit: contain; /* Prevents distortion */
+}

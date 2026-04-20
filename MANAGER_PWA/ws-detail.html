@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IM - Workstation Detail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/brand.css">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/pages/ws-detail.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <main class="detail-wrapper">
+            
+            <header class="top-header">
+                <div class="header-logo" onclick="window.location.href='manager-dashboard.html'" style="cursor: pointer;">
+                    <img src="assets/small-logo.svg" alt="Logo" style="width: 24px;"> IM
+                </div>
+                <img src="assets/bell-icon.svg" alt="Notifications" onclick="window.location.href='alerts.html'" style="cursor: pointer;">
+            </header>
+
+            <section class="page-subheader">
+                <button class="back-btn" onclick="window.location.href='manager-dashboard.html'">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                
+                <div class="ws-title-container">
+                    <h2 class="ws-title">WS-01</h2>
+                    <span class="ws-subtitle">Loreum Epsom</span>
+                </div>
+                
+                <span class="status-badge status-active">Active</span>
+            </section>
+
+            <section class="large-graph-card">
+                <svg viewBox="0 0 36 36" class="large-circular-chart">
+                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                    <path class="circle orange-ring" stroke-dasharray="90, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                    <text x="18" y="20.35" class="percentage-large">90<tspan class="percentage-small">%</tspan></text>
+                </svg>
+            </section>
+
+            <span class="section-title">Recent Allotments</span>
+            <section class="allotments-list">
+                
+                <div class="task-row">
+                    <div class="task-card-new">
+                        <div class="task-info">
+                            <span class="task-name-new">Task's Name</span>
+                            <span class="task-desc-new">Description Loreum Epsom<br>Description Loreum Epsom</span>
+                            <div class="task-avatars-group">
+                                <img src="assets/lisa.svg" class="task-avatar-small" alt="User">
+                                <img src="assets/lisa.svg" class="task-avatar-small" alt="User">
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn-circle edit-btn" onclick="window.location.href='edit-task.html'">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                            </button>
+                            <button class="action-btn-circle delete-btn">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D32F2F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <span class="task-time-outside">09:30</span>
+                </div>
+
+                <div class="task-row">
+                    <div class="task-card-new">
+                        <div class="task-info">
+                            <span class="task-name-new">Task's Name</span>
+                            <span class="task-desc-new">Description Loreum Epsom<br>Description Loreum Epsom</span>
+                            <div class="task-avatars-group">
+                                <img src="assets/lisa.svg" class="task-avatar-small" alt="User">
+                                <img src="assets/lisa.svg" class="task-avatar-small" alt="User">
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn-circle edit-btn" onclick="window.location.href='edit-task.html'">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                            </button>
+                            <button class="action-btn-circle delete-btn">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D32F2F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <span class="task-time-outside">09:30</span>
+                </div>
+
+                <div class="task-row">
+                    <div class="task-card-new">
+                        <div class="task-info">
+                            <span class="task-name-new">Task's Name</span>
+                            <span class="task-desc-new">Description Loreum Epsom<br>Description Loreum Epsom</span>
+                            <div class="task-avatars-group">
+                                <img src="assets/lisa.svg" class="task-avatar-small" alt="User">
+                                <img src="assets/lisa.svg" class="task-avatar-small" alt="User">
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn-circle edit-btn" onclick="window.location.href='edit-task.html'">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                            </button>
+                            <button class="action-btn-circle delete-btn">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D32F2F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <span class="task-time-outside">09:30</span>
+                </div>
+
+            </section>
+        </main>
+
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="window.location.href='manager-dashboard.html'">
+                <img src="assets/home-icon.svg" alt="Home" style="filter: brightness(0) invert(1);"> 
+            </div>
+            
+            <div class="nav-item" onclick="window.location.href='quick-allot.html'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                </svg>
+            </div>
+
+            <div class="nav-item" onclick="window.location.href='operators.html'">
+                <img src="assets/operator-icon.svg" alt="Operators">
+            </div>
+        </nav>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/data-service.js"></script>
+    <script src="js/pages/ws-detail.js"></script>
+</body>
+</html>

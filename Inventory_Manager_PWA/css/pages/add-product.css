@@ -1,0 +1,178 @@
+/* =========================================
+   ADD PRODUCT SPECIFIC STYLES
+   ========================================= */
+
+.add-product-container {
+    background-color: var(--color-background);
+    padding-bottom: 80px; 
+}
+
+/* Header Adjustments */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px 10px 24px;
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img { width: 24px; height: 24px; }
+.logo-text { font-size: 20px; font-weight: 800; color: var(--color-text-main); }
+.icon-sm { width: 20px; height: 20px; cursor: pointer; }
+
+/* Content Layout */
+.page-content {
+    padding: 0 24px;
+}
+
+/* Sub-header (Back Button + Title) */
+.sub-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+    margin-bottom: 24px;
+    justify-content: center;
+    position: relative;
+}
+
+.back-btn {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+}
+
+.page-title {
+    color: var(--color-primary);
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Form Styles (Reusing patterns from quick-allot) */
+.product-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.custom-input {
+    width: 100%;
+    background-color: #EEEEEE;
+    color: var(--color-text-main);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-family: inherit;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+
+.custom-input::placeholder { color: #A0A0A0; }
+.text-center { text-align: center; }
+
+.select-input {
+    appearance: none;
+    -webkit-appearance: none;
+    color: #A0A0A0;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23A0A0A0%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 12px auto;
+}
+.select-input option { color: var(--color-text-main); }
+
+.textarea-input { resize: none; padding-top: 12px; }
+
+/* Flex Rows */
+.input-row { display: flex; gap: 12px; }
+.input-qty { flex: 2; }
+.input-units { flex: 1; }
+
+.input-row-half {
+    display: flex;
+    gap: 12px;
+}
+.input-row-half .custom-input { flex: 1; }
+
+/* Custom Stepper UI (- / + buttons) */
+.stepper-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.stepper-btn {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 1;
+    user-select: none;
+}
+
+.stepper-btn:active {
+    transform: scale(0.95);
+}
+
+/* Scanned Data Pill */
+.scanned-pill {
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    padding: 14px;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Button */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    font-weight: 600;
+    border-radius: 24px;
+    border: none;
+    cursor: pointer;
+    padding: 14px 24px;
+    font-size: 14px;
+    transition: transform 0.1s ease;
+    width: auto;
+    align-self: center;
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+
+.btn-primary:active { transform: scale(0.96); }
+
+.footer-copy {
+    text-align: center;
+    font-size: 8px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    margin-top: 10px;
+}

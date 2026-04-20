@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IM - Inventory</title>
+    <link rel="stylesheet" href="css/brand.css">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/pages/inventory.css">
+</head>
+<body>
+
+    <main class="app-container inventory-container">
+        
+        <header class="top-header">
+            <div class="header-left">
+                <div class="header-logo">
+                    <a href="im-dashboard.html">
+                        <img src="assets/small-logo.svg" alt="Logo" class="logo-img"> 
+                        <span class="logo-text">IM</span>
+                    </a>
+                </div>
+            </div>
+            <div class="header-right">
+                <img src="assets/bell-icon.svg" alt="Notifications" class="icon-sm" onclick="window.location.href='im-alerts.html'">
+            </div>
+        </header>
+
+        <div class="page-content">
+            <div class="toggle-wrapper">
+                <div class="toggle-container">
+                    <button class="toggle-btn active" id="btn-location" onclick="switchTab('location')">Location</button>
+                    <button class="toggle-btn" id="btn-stock" onclick="switchTab('stock')">Stock Inventory</button>
+                </div>
+            </div>
+
+            <h1 class="page-title" id="inventory-title">Check Location</h1>
+
+            <div class="search-bar-row">
+                <div class="search-input-container">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" class="search-input" placeholder="Search Material">
+                    <svg class="clear-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </div>
+                <button class="filter-btn-square">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+                </button>
+            </div>
+
+            <div class="active-filters">
+                <div class="filter-pill-orange">All Material &times;</div>
+            </div>
+
+            <div id="view-location" style="display: grid;" class="location-grid">
+                <div class="loc-card highlighted">
+                    <div class="loc-header">Speaker Mesh Grille<br><span class="loc-sub">Acoustic Material</span></div>
+                    <div class="loc-qty">190<br><span class="loc-units">Units</span></div>
+                    <div class="loc-footer"><span>RN: B-3</span><span>SN: 3</span></div>
+                </div>
+                <div class="loc-card">
+                    <div class="loc-header">Speaker Mesh Grille<br><span class="loc-sub">Acoustic Material</span></div>
+                    <div class="loc-qty">190<br><span class="loc-units">Units</span></div>
+                    <div class="loc-footer"><span>RN: B-3</span><span>SN: 3</span></div>
+                </div>
+                <div class="loc-card">
+                    <div class="loc-header">Speaker Mesh Grille<br><span class="loc-sub">Acoustic Material</span></div>
+                    <div class="loc-qty">190<br><span class="loc-units">Units</span></div>
+                    <div class="loc-footer"><span>RN: B-3</span><span>SN: 3</span></div>
+                </div>
+                <div class="loc-card">
+                    <div class="loc-header">Speaker Mesh Grille<br><span class="loc-sub">Acoustic Material</span></div>
+                    <div class="loc-qty">190<br><span class="loc-units">Units</span></div>
+                    <div class="loc-footer"><span>RN: B-3</span><span>SN: 3</span></div>
+                </div>
+            </div>
+
+            <div id="view-stock" style="display: none;" class="stock-list">
+                
+                <div class="stock-card" onclick="window.location.href='item-detail.html'">
+                    <div class="stock-header">
+                        <div class="stock-title-area">
+                            <h3>Speaker Mesh Grille</h3>
+                            <p>Acoustic Material</p>
+                        </div>
+                        <span class="status-badge status-active">Adequate</span>
+                    </div>
+                    <div class="stock-qty-center">190<br><span>Units</span></div>
+                    <div class="stock-footer"><span>Rack Number: B-3</span><span>Shelf Number: 3</span></div>
+                </div>
+
+                <div class="stock-card" onclick="window.location.href='item-detail.html'">
+                    <div class="stock-header">
+                        <div class="stock-title-area">
+                            <h3>Silicone Eartips — S/M/L</h3>
+                            <p>Acoustic Material</p>
+                        </div>
+                        <span class="status-badge status-issue">Critically Low</span>
+                    </div>
+                    <div class="stock-qty-center">28<br><span>Units</span></div>
+                    <div class="stock-footer"><span>Rack Number: B-2</span><span>Shelf Number: 3</span></div>
+                </div>
+
+                <div class="stock-card" onclick="window.location.href='item-detail.html'">
+                    <div class="stock-header">
+                        <div class="stock-title-area">
+                            <h3>Internal Wiring Harness</h3>
+                            <p>Acoustic Material</p>
+                        </div>
+                        <span class="status-badge status-hold">Getting Low</span>
+                    </div>
+                    <div class="stock-qty-center">55<br><span>Units</span></div>
+                    <div class="stock-footer"><span>Rack Number: B-2</span><span>Shelf Number: 3</span></div>
+                </div>
+            </div>
+
+            <div class="footer-copy">IM@2026</div>
+            <div style="height: 100px;"></div>
+        </div>
+
+        <nav class="bottom-nav">
+            <div class="nav-item" onclick="window.location.href='im-dashboard.html'"><img src="assets/home-icon.svg" alt="Home"></div>
+            <div class="nav-item" onclick="window.location.href='quick-allot.html'"><img src="assets/nav-quick-allot.svg" alt="Quick Allot"></div>
+            <div class="nav-item" onclick="window.location.href='scanned-product.html'"><img src="assets/nav-scan-box.svg" alt="Scan"></div>
+            <div class="nav-item active" onclick="window.location.href='inventory.html'">
+                <img src="assets/nav-inventory.svg" alt="Inventory" style="filter: brightness(0) invert(1);">
+            </div>
+        </nav>
+
+    </main>
+
+    <script>
+        // Check URL on load to see if we should open the Stock tab
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('tab') === 'stock') {
+                switchTab('stock');
+            }
+        });
+
+        function switchTab(tab) {
+            const locView = document.getElementById('view-location');
+            const stockView = document.getElementById('view-stock');
+            const btnLoc = document.getElementById('btn-location');
+            const btnStock = document.getElementById('btn-stock');
+            const title = document.getElementById('inventory-title');
+
+            if (tab === 'location') {
+                locView.style.display = 'grid';
+                stockView.style.display = 'none';
+                btnLoc.classList.add('active');
+                btnStock.classList.remove('active');
+                title.innerText = 'Check Location';
+            } else {
+                locView.style.display = 'none';
+                stockView.style.display = 'flex';
+                btnStock.classList.add('active');
+                btnLoc.classList.remove('active');
+                title.innerText = 'Stock Inventory';
+            }
+        }
+    </script>
+</body>
+</html>

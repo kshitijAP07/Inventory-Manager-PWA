@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IM - Operators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/brand.css">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/pages/operators.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <main class="operators-wrapper">
+            
+            <header class="top-header">
+                <div class="header-logo" onclick="window.location.href='manager-dashboard.html'" style="cursor: pointer;">
+                    <img src="assets/small-logo.svg" alt="Logo" style="width: 24px;"> IM
+                </div>
+                <img src="assets/bell-icon.svg" alt="Notifications" onclick="window.location.href='alerts.html'" style="cursor: pointer;">
+            </header>
+
+            <button class="back-btn" onclick="window.location.href='manager-dashboard.html'" aria-label="Back to Dashboard">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+
+            <span class="section-title">Operators</span>
+
+            <section class="operators-grid">
+                
+                <div class="operator-card">
+                    <span class="op-name">Lisa</span>
+                    <img src="assets/lisa.svg" alt="Lisa" class="op-avatar">
+                    <span class="op-age">Age: 22</span>
+                </div>
+
+                <div class="operator-card">
+                    <span class="op-name">Lisa</span>
+                    <img src="assets/lisa.svg" alt="Lisa" class="op-avatar">
+                    <span class="op-age">Age: 22</span>
+                </div>
+
+                <div class="operator-card">
+                    <span class="op-name">Lisa</span>
+                    <img src="assets/lisa.svg" alt="Lisa" class="op-avatar">
+                    <span class="op-age">Age: 22</span>
+                </div>
+
+                <div class="operator-card">
+                    <span class="op-name">Lisa</span>
+                    <img src="assets/lisa.svg" alt="Lisa" class="op-avatar">
+                    <span class="op-age">Age: 22</span>
+                </div>
+                
+                <div class="operator-card">
+                    <span class="op-name">Lisa</span>
+                    <img src="assets/lisa.svg" alt="Lisa" class="op-avatar">
+                    <span class="op-age">Age: 22</span>
+                </div>
+                
+                <div class="operator-card">
+                    <span class="op-name">Lisa</span>
+                    <img src="assets/lisa.svg" alt="Lisa" class="op-avatar">
+                    <span class="op-age">Age: 22</span>
+                </div>
+
+            </section>
+        </main>
+
+        <nav class="bottom-nav">
+            <div class="nav-item" onclick="window.location.href='manager-dashboard.html'">
+                <img src="assets/home-icon.svg" alt="Home"> 
+            </div>
+            
+            <div class="nav-item" onclick="window.location.href='quick-allot.html'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                </svg>
+            </div>
+
+            <div class="nav-item active" onclick="window.location.href='operators.html'">
+                <img src="assets/operator-icon.svg" alt="Operators" style="filter: brightness(0) invert(1);">
+            </div>
+        </nav>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/data-service.js"></script>
+    <script src="js/pages/operators.js"></script>
+</body>
+</html>

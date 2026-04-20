@@ -1,0 +1,119 @@
+/* Layout and Spacing */
+.alerts-wrapper {
+    padding: 16px 16px 120px 16px;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+
+/* Tint the bell icon */
+.bell-alert {
+    content: url('data:image/svg+xml;utf8,<svg fill="%23FF631C" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>');
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+
+
+/* Section Title */
+.alerts-title {
+    color: var(--color-primary);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.alerts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+/* Individual Alert Card */
+.alert-card {
+    background-color: #F4F4F4;
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    gap: 10px;
+}
+
+.alert-icon-wrapper {
+    flex-shrink: 0;
+    padding-top: 2px;
+}
+
+.alert-content {
+    flex-grow: 1;
+}
+
+
+/* Card Typography */
+.alert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.alert-id,
+.alert-time {
+    color: var(--color-primary);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.alert-main-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: 6px;
+    line-height: 1.2;
+}
+
+.alert-desc {
+    font-size: 11px;
+    color: var(--color-text-main);
+    opacity: 0.8;
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+
+/* Action Buttons */
+.alert-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.btn-action {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    padding: 6px 12px;
+    font-size: 9px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}

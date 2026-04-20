@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Operator - Raise Issue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/brand.css">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/pages/raise-issue.css">
+</head>
+<body>
+
+    <main class="app-container operator-raise-issue-container">
+        
+        <header class="top-header">
+            <div class="header-left">
+                <div class="header-logo">
+                    <img src="assets/small-logo.svg" alt="Logo" class="logo-img filter-white"> 
+                    <span class="logo-text">IM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="bell-container" onclick="window.location.href='alerts.html'">
+                    <img src="assets/bell-icon.svg" alt="Notifications" class="icon-sm filter-white">
+                    <div class="notification-dot"></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-content">
+            
+            <div class="sub-header-row">
+                <div class="back-btn-white" onclick="window.location.href='home.html'">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </div>
+                <h1 class="page-title-center">Raise Issue</h1>
+            </div>
+
+            <form class="raise-issue-form" id="raiseIssueForm">
+                
+                <div class="input-group">
+                    <select class="custom-input-glass select-input-glass" required>
+                        <option value="" disabled selected>Type of Issue</option>
+                        <option value="machine">Machine Breakdown</option>
+                        <option value="material">Material Shortage</option>
+                        <option value="quality">Quality Defect</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <select class="custom-input-glass select-input-glass" required>
+                        <option value="" disabled selected>Select KIT</option>
+                        <option value="kit-01">KIT-01</option>
+                        <option value="kit-02">KIT-02</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <select class="custom-input-glass select-input-glass" required>
+                        <option value="" disabled selected>Select Material</option>
+                        <option value="mat-01">Speaker Mesh Grille</option>
+                        <option value="mat-02">Silicone Eartips</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <textarea class="custom-input-glass textarea-glass" placeholder="Reason" rows="3" required></textarea>
+                </div>
+
+                <div class="input-group">
+                    <textarea class="custom-input-glass textarea-glass" placeholder="Description" rows="4" required></textarea>
+                </div>
+
+                <button type="submit" class="btn-white-primary">Raise Issue</button>
+            </form>
+            
+            <div style="height: 120px;"></div> </div>
+
+        <nav class="floating-bottom-nav">
+            <div class="nav-item-inactive" onclick="window.location.href='home.html'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="home-icon-svg">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+            </div>
+        </nav>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/data-service.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/pages/raise-issue.js"></script>
+    <script>
+        document.getElementById('raiseIssueForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Issue has been raised to the Workstation Manager.');
+            window.location.href = 'home.html';
+        });
+    </script>
+</body>
+</html>

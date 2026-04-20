@@ -1,0 +1,30 @@
+/* Google Fonts: Space Grotesk */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Existing Palette */
+    --color-primary: #FF631C;
+    --color-text-main: #0F0F0F;
+    --color-text-muted: rgba(15, 15, 15, 0.4);
+    --color-surface: rgba(61, 61, 61, 0.1);
+    --color-background: #FFFFFF;
+
+    /* NEW: Status Colors extracted from your Figma */
+    --color-status-active: #00C853; /* Green */
+    --color-status-issue: #FF1744;  /* Red */
+    --color-status-hold: #FFC400;   /* Yellow */
+
+    /* NEW: Chart UI Colors */
+    --color-dark-gray: #2D2D2D;
+    --color-light-gray: #F5F5F5;
+    --color-mid-gray: #E0E0E0;
+
+    /* Border Radii */
+    --radius-app: 20px;
+    --radius-input: 8px;
+    --radius-button: 24px;
+    --radius-card: 16px;
+
+    /* Typography */
+    --font-base: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+}

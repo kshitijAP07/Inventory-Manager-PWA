@@ -1,0 +1,22 @@
+:root {
+    /* Color Palette */
+    --color-primary: #FF631C;       /* Brand Orange */
+    --color-text-main: #0F0F0F;     /* Dark Text */
+    --color-text-muted: rgba(15, 15, 15, 0.4); 
+    --color-text-white: #FFFFFF;
+    --color-background: #FFFFFF;    /* Standard Background */
+    
+    /* Operator Specific Action Colors */
+    --color-action-yellow: #FFD600; /* Raise Issue Triangle */
+    --color-action-green: #00E676;  /* Task Complete Check */
+    --color-action-red: #FF1744;    /* Task Reject/Hold Cross */
+
+    /* Border Radii */
+    --radius-app: 20px;
+    --radius-input: 8px;
+    --radius-button: 24px;
+    --radius-card: 16px;
+
+    /* Typography */
+    --font-base: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+}

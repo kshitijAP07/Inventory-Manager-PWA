@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IM - Add Product</title>
+    
+    <link rel="stylesheet" href="css/brand.css">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/pages/add-product.css">
+</head>
+<body>
+
+    <main class="app-container add-product-container">
+        <header class="top-header">
+            <div class="header-left">
+                <div class="header-logo">
+                    <a href="im-dashboard.html">
+                        <img src="assets/small-logo.svg" alt="Logo" class="logo-img"> 
+                        <span class="logo-text">IM</span>
+                    </a>
+                </div>
+            </div>
+            <div class="header-right">
+                <img src="assets/bell-icon.svg" alt="Notifications" class="icon-sm" onclick="window.location.href='im-alerts.html'">
+            </div>
+        </header>
+
+        <div class="page-content">
+            <div class="sub-header">
+                <div class="back-btn" onclick="window.history.back()">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </div>
+                <h1 class="page-title" id="page-title">Add Manually</h1>
+            </div>
+
+            <form class="product-form">
+                
+                <div id="scanned-pill-container" style="display: none;">
+                    <div class="scanned-pill" id="scanned-data-text">
+                        Neodymium Magnets N52 — MGNM
+                    </div>
+                </div>
+
+                <div id="manual-inputs-container">
+                    <input type="text" class="custom-input" placeholder="Enter Material Name">
+                </div>
+                <input type="text" class="custom-input" placeholder="Batch Number">
+                
+                <input type="text" class="custom-input" id="manual-qr-field" placeholder="QR Code Number (If it's there)">
+
+                <select class="custom-input select-input">
+                    <option value="" disabled selected>Category</option>
+                    <option value="hardware">Hardware</option>
+                    <option value="electronics">Electronics</option>
+                </select>
+
+                <div class="input-row">
+                    <input type="number" class="custom-input input-qty" placeholder="Quantity">
+                    <select class="custom-input select-input input-units">
+                        <option value="units" selected>Units</option>
+                        <option value="kg">Kg</option>
+                        <option value="pcs">Pcs</option>
+                    </select>
+                </div>
+
+                <div class="stepper-row">
+                    <div class="stepper-btn minus">-</div>
+                    <input type="number" class="custom-input text-center" placeholder="Min threshold">
+                    <div class="stepper-btn plus">+</div>
+                </div>
+
+                <div class="stepper-row">
+                    <div class="stepper-btn minus">-</div>
+                    <input type="number" class="custom-input text-center" placeholder="Max Capacity">
+                    <div class="stepper-btn plus">+</div>
+                </div>
+
+                <input type="text" class="custom-input" placeholder="Supplier Name">
+                
+                <div class="input-row-half">
+                    <input type="text" class="custom-input" placeholder="Supplier Name"> <input type="text" class="custom-input" placeholder="Supplier City">
+                </div>
+
+                <div class="input-row-half">
+                    <input type="text" class="custom-input" placeholder="PO Number">
+                    <input type="text" class="custom-input" placeholder="Phone Number">
+                </div>
+
+                <input type="email" class="custom-input" placeholder="Supplier E-Mail">
+
+                <div class="input-row-half">
+                    <input type="text" class="custom-input" placeholder="Rack Number">
+                    <input type="text" class="custom-input" placeholder="Shelf Number">
+                </div>
+
+                <textarea class="custom-input textarea-input" placeholder="Storage & Handeling Note" rows="3"></textarea>
+
+                <button type="button" class="btn-primary center-btn">Confirm & Log to Storage</button>
+            </form>
+
+            <div class="footer-copy">IM@2026</div>
+            <div style="height: 100px;"></div>
+        </div>
+
+        <nav class="bottom-nav">
+            <div class="nav-item" onclick="window.location.href='im-dashboard.html'"><img src="assets/home-icon.svg" alt="Home"></div>
+            <div class="nav-item" onclick="window.location.href='quick-allot.html'"><img src="assets/nav-quick-allot.svg" alt="Quick Allot"></div>
+            
+            <div class="nav-item active" onclick="window.location.href='scanned-product.html'">
+                <img src="assets/nav-scan-box.svg" alt="Scan" style="filter: brightness(0) invert(1);">
+            </div>
+            
+            <div class="nav-item" onclick="window.location.href='inventory.html'"><img src="assets/nav-inventory.svg" alt="Inventory"></div>
+        </nav>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/data-service.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/pages/add-product.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const mode = urlParams.get('mode'); // e.g., ?mode=scanned
+            const data = urlParams.get('data'); // e.g., ?data=Neodymium...
+
+            if (mode === 'scanned') {
+                // Change Title
+                document.getElementById('page-title').innerText = "Scanned Item";
+                
+                // Hide Manual fields, show Scanned Pill
+                document.getElementById('manual-inputs-container').style.display = 'none';
+                document.getElementById('manual-qr-field').style.display = 'none';
+                document.getElementById('scanned-pill-container').style.display = 'block';
+
+                // Inject scanned data into pill if available
+                if (data) {
+                    document.getElementById('scanned-data-text').innerText = data;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

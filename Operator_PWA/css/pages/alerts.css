@@ -1,0 +1,154 @@
+/* =========================================
+   OPERATOR ALERTS SPECIFIC STYLES
+   ========================================= */
+
+.operator-alerts-container {
+    background-color: var(--color-primary); /* Solid orange background */
+    color: #FFFFFF;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Header */
+.top-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px 10px 24px; }
+.header-left, .header-right { display: flex; align-items: center; gap: 16px; }
+.logo-img { width: 24px; height: 24px; }
+.logo-text { font-size: 20px; font-weight: 800; color: #FFFFFF; }
+.filter-white { filter: brightness(0) invert(1); }
+.icon-sm { width: 20px; height: 20px; cursor: pointer; }
+
+.bell-container { position: relative; cursor: pointer; }
+.notification-dot { 
+    position: absolute; 
+    top: -2px; 
+    right: -2px; 
+    width: 6px; 
+    height: 6px; 
+    background-color: #FF1744; /* Bright Red */
+    border-radius: 50%; 
+    border: 2px solid var(--color-primary); /* Orange border cuts it out from the white bell */
+}
+.page-content { padding: 0 24px; }
+
+/* Page Title */
+.page-title {
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 800;
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+
+/* Glassmorphic Alert Cards */
+.alerts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.op-alert-card {
+    background-color: rgba(255, 255, 255, 0.25); /* Frosted glass white */
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.alert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.alert-header-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.warning-icon-yellow { width: 14px; height: 14px; }
+.warning-icon-red { width: 14px; height: 14px; }
+
+.alert-id, .alert-time {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.alert-name {
+    font-size: 18px;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin: 4px 0 0 0;
+}
+
+.alert-desc {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+    margin: 0 0 8px 0;
+}
+
+/* Action Buttons inside Cards */
+.alert-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-pill-white {
+    background-color: #FFFFFF;
+    color: var(--color-primary); /* Orange text */
+    font-size: 10px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 12px; /* Small pill shape */
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.btn-pill-white:active {
+    transform: scale(0.95);
+}
+
+/* Floating Bottom Nav (Inactive State) */
+.floating-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; 
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.7), transparent); 
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 24px;
+    z-index: 100;
+}
+
+/* Inactive Nav Item Style */
+.floating-bottom-nav .nav-item-inactive {
+    width: 56px; 
+    height: 56px;
+    background-color: rgba(0, 0, 0, 0.05); /* Faint, unselected circle */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--color-text-main); /* Dark grey icon */
+    transition: transform 0.1s ease;
+}
+
+.floating-bottom-nav .nav-item-inactive:active {
+    transform: scale(0.95);
+}
+
+.home-icon-svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+}

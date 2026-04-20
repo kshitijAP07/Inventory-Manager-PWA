@@ -1,0 +1,225 @@
+/* Layout and Header */
+.detail-wrapper {
+    padding: 16px 16px 120px 16px;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+
+/* Page Sub-Header */
+.page-subheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    width: 36px;
+    height: 36px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+}
+
+.ws-title-container {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.ws-title {
+    color: var(--color-primary);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.ws-subtitle {
+    color: var(--color-text-muted);
+    font-size: 12px;
+}
+
+.status-badge {
+    font-size: 9px;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+.status-active {
+    background-color: var(--color-status-active);
+}
+
+
+/* Large Graph Card (Scaled down) */
+.large-graph-card {
+    background-color: #F4F4F4;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+    width: 160px;
+    height: 160px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.large-circular-chart {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #E0E0E0;
+    stroke-width: 3;
+}
+
+.circle {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    animation: progress 1s ease-out forwards;
+}
+
+.orange-ring {
+    stroke: var(--color-primary);
+}
+
+.percentage-large {
+    fill: var(--color-text-main);
+    font-family: var(--font-base);
+    font-size: 10px;
+    text-anchor: middle;
+    font-weight: bold;
+}
+
+.percentage-small {
+    font-size: 5px;
+}
+
+
+/* Section Title */
+.section-title {
+    color: var(--color-primary);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: block;
+}
+
+
+/* --- NEW TASK ROW STYLES (Sleeker) --- */
+.allotments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.task-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.task-card-new {
+    background-color: #F4F4F4;
+    border-radius: 12px;
+    padding: 12px 14px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.task-name-new {
+    color: var(--color-text-main);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.task-desc-new {
+    color: var(--color-text-muted);
+    font-size: 9px;
+    line-height: 1.3;
+}
+
+.task-avatars-group {
+    display: flex;
+    margin-top: 6px;
+}
+
+.task-avatar-small {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid #F4F4F4;
+}
+
+.task-avatar-small + .task-avatar-small {
+    margin-left: -8px;
+}
+
+.task-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+}
+
+.action-btn-circle {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: #E0E0E0;
+}
+
+.delete-btn {
+    background-color: #FFCDD2;
+}
+
+.task-time-outside {
+    color: var(--color-primary);
+    font-size: 12px;
+    font-weight: 500;
+    min-width: 36px;
+    text-align: right;
+}

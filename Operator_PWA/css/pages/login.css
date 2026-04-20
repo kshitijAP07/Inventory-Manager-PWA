@@ -1,0 +1,78 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background-color: white;
+    width: 390px;
+    max-width: 100%;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+.brand-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.main-logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 16px;
+}
+
+.brand-text {
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1;
+    margin: 0;
+    letter-spacing: -2px;
+}
+
+.login-form {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.login-form input {
+    width: 100%;
+    background-color: #E8E8E8;
+    color: var(--color-text-main);
+    padding: 14px 18px;
+    border-radius: var(--radius-input);
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.login-form input::placeholder {
+    color: var(--color-text-muted);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 0;
+    border-radius: var(--radius-button);
+    margin-top: 12px;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.btn-primary:active {
+    transform: scale(0.96);
+    background-color: #E55818;
+}

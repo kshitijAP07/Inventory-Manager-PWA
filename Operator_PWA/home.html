@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Operator - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/brand.css">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/pages/home.css">
+</head>
+<body>
+
+    <main class="app-container operator-home-container">
+        
+        <div class="bg-curve"></div>
+
+        <header class="top-header">
+            <div class="header-left">
+                <div class="header-logo">
+                    <img src="assets/small-logo.svg" alt="Logo" class="logo-img filter-white"> 
+                    <span class="logo-text">IM</span>
+                </div>
+            </div>
+            <div class="header-right" style="display: flex; align-items: center; gap: 16px;">
+                <div class="bell-container" onclick="window.location.href='alerts.html'" style="cursor: pointer;">
+                    <img src="assets/bell-icon.svg" alt="Notifications" class="icon-sm filter-white">
+                    <div class="notification-dot"></div>
+                </div>
+                <button id="logoutBtn" style="background: none; border: none; color: #FF1744; font-weight: 600; cursor: pointer; font-family: inherit; font-size: 14px;">Logout</button>
+            </div>
+        </header>
+
+        <div class="page-content">
+            
+            <div class="datetime-section">
+                <p class="location-text">Pune</p>
+                <h2 class="time-text">Friday- 03:35 PM</h2>
+                <div class="date-large">
+                    <span class="date-day">10</span>
+                    <span class="date-month">Apr</span>
+                </div>
+            </div>
+
+            <div class="efficiency-card">
+                <div class="eff-content">
+                    <span class="eff-label">Efficiency</span>
+                    <span class="eff-value">98%</span>
+                </div>
+                <div class="eff-progress-bg"></div>
+            </div>
+            <p class="eff-subtext">This represents the progress of<br>you by far now.</p>
+
+            <h3 class="section-title">Allotted Tasks to You</h3>
+
+            <div class="task-list">
+                
+                <div class="task-row">
+                    <div class="op-task-card">
+                        <div class="task-info">
+                            <h4>Task's Name</h4>
+                            <p>Description Loreum Epssom<br>Description Loreum Epssom</p>
+                            <div class="task-assignee">
+                                <img src="assets/operator-avatar.svg" alt="Avatar" class="avatar-xs">
+                                <span>-Assigned You</span>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="btn-action btn-yellow" onclick="window.location.href='raise-issue.html'">
+                                <svg viewBox="0 0 24 24" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"><path d="M12 4L4 20h16z"></path></svg>
+                            </button>
+                            <button class="btn-action btn-green">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </button>
+                            <button class="btn-action btn-red">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <span class="task-time-side">09:30</span>
+                </div>
+
+                <div class="task-row">
+                    <div class="op-task-card">
+                        <div class="task-info">
+                            <h4>Task's Name</h4>
+                            <p>Description Loreum Epssom<br>Description Loreum Epssom</p>
+                            <div class="task-assignee">
+                                <img src="assets/operator-avatar.svg" alt="Avatar" class="avatar-xs">
+                                <span>-Assigned You</span>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="btn-action btn-yellow" onclick="window.location.href='raise-issue.html'"><svg viewBox="0 0 24 24" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"><path d="M12 4L4 20h16z"></path></svg></button>
+                            <button class="btn-action btn-green"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+                            <button class="btn-action btn-red"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                        </div>
+                    </div>
+                    <span class="task-time-side">09:30</span>
+                </div>
+                
+                <div class="task-row">
+                    <div class="op-task-card">
+                        <div class="task-info">
+                            <h4>Task's Name</h4>
+                            <p>Description Loreum Epssom<br>Description Loreum Epssom</p>
+                            <div class="task-assignee">
+                                <img src="assets/operator-avatar.svg" alt="Avatar" class="avatar-xs">
+                                <span>-Assigned You</span>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="btn-action btn-yellow" onclick="window.location.href='raise-issue.html'"><svg viewBox="0 0 24 24" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"><path d="M12 4L4 20h16z"></path></svg></button>
+                            <button class="btn-action btn-green"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+                            <button class="btn-action btn-red"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                        </div>
+                    </div>
+                    <span class="task-time-side">09:30</span>
+                </div>
+
+            </div>
+            
+            <div style="height: 120px;"></div> </div>
+
+        <nav class="floating-bottom-nav">
+            <div class="nav-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="home-icon-svg">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+            </div>
+        </nav>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/data-service.js"></script>
+
+    <script src="js/core.js"></script>
+    <script src="js/pages/home.js"></script>
+</body>
+</html>
