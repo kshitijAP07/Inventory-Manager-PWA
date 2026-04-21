@@ -1,6 +1,6 @@
 /**
- * add-product.js — Inventory Manager Add Product
- * Save new inventory items to Supabase
+ * add-product.js — Inventory Manager Add Product (Step 1)
+ * Saves item details to sessionStorage, then routes to location scanner
  */
 
 IMAuth.requireAuth(['inventory_manager'], '../index.html')
@@ -28,114 +28,65 @@ document.addEventListener('DOMContentLoaded', () => {
     // Wire submit button
     const submitBtn = document.querySelector('.btn-primary.center-btn')
     if (submitBtn) {
-        submitBtn.addEventListener('click', handleAddProduct)
+        submitBtn.addEventListener('click', handleProceedToScan)
     }
 })
 
-async function handleAddProduct() {
+async function handleProceedToScan() {
     const user = await IMAuth.getCurrentUser()
 
-    const form = document.querySelector('.product-form')
-    if (!form) return
-
-    // Determine if scanned mode
     const urlParams = new URLSearchParams(window.location.search)
     const mode = urlParams.get('mode')
     const scannedData = urlParams.get('data')
 
     let materialName = ''
-    let batchNumber = ''
-    let qrCode = ''
-
-    if (mode === 'scanned') {
-        materialName = scannedData || ''
-        // In scanned mode, manual-inputs-container is hidden
-        const batchInput = form.querySelectorAll('input.custom-input')[0]
-        batchNumber = batchInput?.value?.trim() || ''
+    
+    // FIX: Safely extract the name from the JSON payload
+    if (mode === 'scanned' && scannedData) {
+        try {
+            const parsed = JSON.parse(scannedData);
+            materialName = parsed.name || '';
+        } catch (e) {
+            materialName = scannedData; // Fallback for plain text
+        }
     } else {
-        // Manual mode
-        const manualContainer = document.getElementById('manual-inputs-container')
-        const nameInput = manualContainer?.querySelector('.custom-input')
-        materialName = nameInput?.value?.trim() || ''
-
-        const allInputs = form.querySelectorAll('input.custom-input')
-        batchNumber = allInputs[1]?.value?.trim() || ''
-        qrCode = document.getElementById('manual-qr-field')?.value?.trim() || ''
+        materialName = document.getElementById('add-material-name')?.value?.trim() || ''
     }
-
-    // Category select
-    const categorySelect = form.querySelector('.select-input:not(.input-units)')
-    const category = categorySelect?.value || ''
-
-    // Quantity & Unit
-    const qtyInput = form.querySelector('.input-qty')
-    const unitSelect = form.querySelector('.input-units')
-    const quantity = parseInt(qtyInput?.value) || 0
-    const unit = unitSelect?.value || 'units'
-
-    // Min threshold & Max capacity (stepper rows)
-    const stepperInputs = form.querySelectorAll('.stepper-row input')
-    const minThreshold = parseInt(stepperInputs[0]?.value) || 0
-    const maxCapacity = parseInt(stepperInputs[1]?.value) || 0
-
-    // Supplier info
-    const halfRows = form.querySelectorAll('.input-row-half')
-    let supplierName = '', supplierCity = '', poNumber = '', phoneNumber = '', rackNumber = '', shelfNumber = ''
-
-    if (halfRows[0]) {
-        const inputs = halfRows[0].querySelectorAll('.custom-input')
-        supplierName = inputs[0]?.value?.trim() || ''
-        supplierCity = inputs[1]?.value?.trim() || ''
-    }
-    if (halfRows[1]) {
-        const inputs = halfRows[1].querySelectorAll('.custom-input')
-        poNumber = inputs[0]?.value?.trim() || ''
-        phoneNumber = inputs[1]?.value?.trim() || ''
-    }
-    if (halfRows[2]) {
-        const inputs = halfRows[2].querySelectorAll('.custom-input')
-        rackNumber = inputs[0]?.value?.trim() || ''
-        shelfNumber = inputs[1]?.value?.trim() || ''
-    }
-
-    // Email
-    const emailInput = form.querySelector('input[type="email"]')
-    const supplierEmail = emailInput?.value?.trim() || ''
-
-    // Storage notes
-    const textareas = form.querySelectorAll('.textarea-input')
-    const storageNotes = textareas[0]?.value?.trim() || ''
 
     if (!materialName) {
         alert('Please enter a material name.')
         return
     }
 
-    const { data, error } = await IMData.createInventoryItem({
+    // Gather all form data using the specific IDs and classes
+    const pendingItem = {
         name: materialName,
-        category: category,
-        batch_number: batchNumber,
-        qr_code: qrCode,
-        quantity: quantity,
-        unit: unit,
-        min_threshold: minThreshold,
-        max_capacity: maxCapacity,
-        location: { rack: rackNumber, shelf: shelfNumber },
+        batch_number: document.getElementById('add-batch-number')?.value?.trim() || '',
+        qr_code: document.getElementById('manual-qr-field')?.value?.trim() || '',
+        category: document.getElementById('add-category')?.value || '',
+        
+        // Quantity & Unit
+        quantity: parseInt(document.querySelector('.input-qty')?.value) || 0,
+        unit: document.querySelector('.input-units')?.value || 'units',
+        
+        // Steppers
+        min_threshold: parseInt(document.querySelectorAll('.stepper-row input')[0]?.value) || 0,
+        max_capacity: parseInt(document.querySelectorAll('.stepper-row input')[1]?.value) || 0,
+        
+        // Supplier Info
         supplier_info: {
-            name: supplierName,
-            city: supplierCity,
-            po: poNumber,
-            phone: phoneNumber,
-            email: supplierEmail
+            name: document.getElementById('add-supplier-name')?.value?.trim() || '',
+            city: document.getElementById('add-supplier-city')?.value?.trim() || '',
+            phone: document.getElementById('add-supplier-phone')?.value?.trim() || '',
+            email: document.getElementById('add-supplier-email')?.value?.trim() || '',
+            po: ''
         },
-        storage_notes: storageNotes,
+        
+        storage_notes: document.getElementById('add-storage-notes')?.value?.trim() || '',
         last_updated_by: user ? [user.display_name || user.email] : []
-    })
-
-    if (error) {
-        alert('Failed to add product: ' + error.message)
-    } else {
-        alert('Product logged to storage successfully!')
-        window.location.href = 'inventory.html'
     }
+
+    // Save to sessionStorage and route to the new scanner page
+    sessionStorage.setItem('pending_inventory_item', JSON.stringify(pendingItem))
+    window.location.href = 'scan-location.html'
 }

@@ -45,16 +45,17 @@
                 </div>
 
                 <div id="manual-inputs-container">
-                    <input type="text" class="custom-input" placeholder="Enter Material Name">
+                    <input type="text" id="add-material-name" class="custom-input" placeholder="Enter Material Name">
                 </div>
-                <input type="text" class="custom-input" placeholder="Batch Number">
+                <input type="text" id="add-batch-number" class="custom-input" placeholder="Batch Number">
                 
-                <input type="text" class="custom-input" id="manual-qr-field" placeholder="QR Code Number (If it's there)">
+                <input type="text" id="manual-qr-field" class="custom-input" placeholder="QR Code Number (If it's there)">
 
-                <select class="custom-input select-input">
+                <select id="add-category" class="custom-input select-input">
                     <option value="" disabled selected>Category</option>
-                    <option value="hardware">Hardware</option>
-                    <option value="electronics">Electronics</option>
+                    <option value="Acoustic Material">Acoustic Material</option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Electronics">Electronics</option>
                 </select>
 
                 <div class="input-row">
@@ -78,27 +79,18 @@
                     <div class="stepper-btn plus">+</div>
                 </div>
 
-                <input type="text" class="custom-input" placeholder="Supplier Name">
+                <input type="text" id="add-supplier-name" class="custom-input" placeholder="Supplier Name">
                 
                 <div class="input-row-half">
-                    <input type="text" class="custom-input" placeholder="Supplier Name"> <input type="text" class="custom-input" placeholder="Supplier City">
+                    <input type="text" id="add-supplier-city" class="custom-input" placeholder="Supplier City">
+                    <input type="text" id="add-supplier-phone" class="custom-input" placeholder="Phone Number">
                 </div>
 
-                <div class="input-row-half">
-                    <input type="text" class="custom-input" placeholder="PO Number">
-                    <input type="text" class="custom-input" placeholder="Phone Number">
-                </div>
+                <input type="email" id="add-supplier-email" class="custom-input" placeholder="Supplier E-Mail">
 
-                <input type="email" class="custom-input" placeholder="Supplier E-Mail">
+                <textarea id="add-storage-notes" class="custom-input textarea-input" placeholder="Storage & Handling Note" rows="3"></textarea>
 
-                <div class="input-row-half">
-                    <input type="text" class="custom-input" placeholder="Rack Number">
-                    <input type="text" class="custom-input" placeholder="Shelf Number">
-                </div>
-
-                <textarea class="custom-input textarea-input" placeholder="Storage & Handeling Note" rows="3"></textarea>
-
-                <button type="button" class="btn-primary center-btn">Confirm & Log to Storage</button>
+                <button type="button" class="btn-primary center-btn">Proceed to Storage Scan</button>
             </form>
 
             <div class="footer-copy">IM@2026</div>
@@ -128,21 +120,41 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const mode = urlParams.get('mode'); // e.g., ?mode=scanned
-            const data = urlParams.get('data'); // e.g., ?data=Neodymium...
+            const mode = urlParams.get('mode'); 
+            const data = urlParams.get('data'); 
 
             if (mode === 'scanned') {
-                // Change Title
                 document.getElementById('page-title').innerText = "Scanned Item";
-                
-                // Hide Manual fields, show Scanned Pill
                 document.getElementById('manual-inputs-container').style.display = 'none';
                 document.getElementById('manual-qr-field').style.display = 'none';
                 document.getElementById('scanned-pill-container').style.display = 'block';
 
-                // Inject scanned data into pill if available
                 if (data) {
-                    document.getElementById('scanned-data-text').innerText = data;
+                    try {
+                        // 1. Parse the JSON from the QR code
+                        const parsedData = JSON.parse(data);
+                        
+                        // 2. Put ONLY the material name in the black pill
+                        document.getElementById('scanned-data-text').innerText = parsedData.name || "Scanned Material";
+
+                        // 3. Auto-fill all the visible form fields
+                        if (parsedData.batch_number) document.getElementById('add-batch-number').value = parsedData.batch_number;
+                        if (parsedData.category) document.getElementById('add-category').value = parsedData.category;
+                        if (parsedData.quantity) document.querySelector('.input-qty').value = parsedData.quantity;
+                        if (parsedData.unit) document.querySelector('.input-units').value = parsedData.unit.toLowerCase();
+                        
+                        const steppers = document.querySelectorAll('.stepper-row input');
+                        if (parsedData.min_threshold && steppers[0]) steppers[0].value = parsedData.min_threshold;
+                        if (parsedData.max_capacity && steppers[1]) steppers[1].value = parsedData.max_capacity;
+
+                        if (parsedData.supplier_name) document.getElementById('add-supplier-name').value = parsedData.supplier_name;
+                        if (parsedData.supplier_city) document.getElementById('add-supplier-city').value = parsedData.supplier_city;
+                        if (parsedData.supplier_email) document.getElementById('add-supplier-email').value = parsedData.supplier_email;
+                        
+                    } catch (e) {
+                        // Fallback: If it's a plain-text QR code, just show the raw text
+                        document.getElementById('scanned-data-text').innerText = data;
+                    }
                 }
             }
         });
