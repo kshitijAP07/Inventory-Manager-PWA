@@ -92,7 +92,7 @@ function handleScanResult(locCode) {
     locCode = locCode.toUpperCase().trim();
 
     // STRICT FORMAT VALIDATION
-    const regex = /^R([1-8])S([1-6])P([1-4])$/;
+    const regex = /^R([1-8])S([1-5])P([1-4])$/;
     const match = locCode.match(regex);
     
     if (!match) {
