@@ -94,16 +94,39 @@
 .task-row { display: flex; align-items: center; gap: 16px; }
 
 /* Glassmorphism Task Card */
+/* Glassmorphism Task Card */
 .op-task-card {
     flex: 1;
-    background-color: rgba(255, 255, 255, 0.25); /* Semi-transparent white */
+    background-color: rgba(255, 255, 255, 0.25);
     border-radius: 12px;
     padding: 16px;
     display: flex;
     justify-content: space-between;
-    backdrop-filter: blur(10px); /* Frosted glass effect */
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative; /* REQUIRED FOR BADGES */
 }
+
+/* --- NEW STATUS BADGES --- */
+.card-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.badge-active { background-color: #00E676; color: #FFFFFF; }
+.badge-hold { background-color: #FF1744; color: #FFFFFF; }
+.badge-paused { background-color: #FFD600; color: #0F0F0F; }
+
+/* ... keep existing .task-info, etc ... */
+
+/* --- NEW ORANGE PLAY BUTTON --- */
+.btn-orange { background-color: #E65100; } /* Deep orange to contrast with BG */
 
 .task-info { display: flex; flex-direction: column; justify-content: center; gap: 6px; }
 .task-info h4 { font-size: 16px; font-weight: 600; margin: 0; color: #FFFFFF; }
