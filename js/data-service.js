@@ -268,14 +268,14 @@ const IMData = {
     // ═══════════════════════════════════════════
 
     async getAlerts(role) {
-        let query = _supabase
+        // We removed the manual .contains() filter here. 
+        // Our new smart Database RLS policy will automatically ensure 
+        // the user ONLY receives the alerts they are allowed to see!
+        const { data, error } = await _supabase
             .from('alerts')
             .select('*')
             .order('created_at', { ascending: false });
 
-        if (role) query = query.contains('target_roles', [role]);
-
-        const { data, error } = await query;
         if (error) console.error('[IMData] getAlerts:', error.message);
         return data || [];
     },
@@ -293,11 +293,23 @@ const IMData = {
         return count || 0;
     },
 
-    async markAlertRead(id) {
-        const { error } = await _supabase
-            .from('alerts')
-            .update({ is_read: true })
-            .eq('id', id);
+    async markAlertRead(alertId) {
+        // 1. Get the current user
+        const user = await IMAuth.getCurrentUser();
+        if (!user) return { error: new Error("Not logged in") };
+
+        // 2. Fetch the current read_by array for this specific alert
+        const { data: alert } = await _supabase.from('alerts').select('read_by').eq('id', alertId).single();
+        
+        let readArray = alert?.read_by || [];
+        
+        // 3. If this user hasn't read it yet, add their ID to the array
+        if (!readArray.includes(user.id)) {
+            readArray.push(user.id);
+        }
+
+        // 4. Update the database
+        const { error } = await _supabase.from('alerts').update({ read_by: readArray }).eq('id', alertId);
         if (error) console.error('[IMData] markAlertRead:', error.message);
         return { error };
     },

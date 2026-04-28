@@ -12,14 +12,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function loadAlerts() {
     try {
         const alerts = await IMData.getAlerts('manager')
+        const currentUser = await IMAuth.getCurrentUser(); // 1. Get the current user
 
-        // Update title
         const titleEl = document.querySelector('.alerts-title')
         if (titleEl) {
             titleEl.textContent = `${alerts.length} Alert${alerts.length !== 1 ? 's' : ''} !`
         }
 
-        // Render alerts
         const alertsList = document.querySelector('.alerts-list')
         if (!alertsList) return
 
@@ -40,8 +39,11 @@ async function loadAlerts() {
                 ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="#FFC400" stroke="#FFC400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9.5 6.5-3.5 11h-12l-3.5-11z"></path></svg>'
                 : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF1744" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
 
+            // 2. Check if THIS specific user has read it
+            const hasRead = alertItem.read_by && alertItem.read_by.includes(currentUser.id);
+
             const cardHTML = `
-                <div class="alert-card" data-alert-id="${alertItem.id}" onclick="markRead('${alertItem.id}')" style="cursor: pointer; ${alertItem.is_read ? 'opacity: 0.6;' : ''}">
+                <div class="alert-card" data-alert-id="${alertItem.id}" onclick="markRead('${alertItem.id}')" style="cursor: pointer; ${hasRead ? 'opacity: 0.6;' : ''}">
                     <div class="alert-icon-wrapper">
                         ${iconSVG}
                     </div>

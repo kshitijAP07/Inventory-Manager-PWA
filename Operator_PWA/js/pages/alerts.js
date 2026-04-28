@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function loadOperatorAlerts() {
     try {
         const alerts = await IMData.getAlerts('operator')
+        const currentUser = await IMAuth.getCurrentUser(); // NEW: Fetch current user
 
-        // Update title
         const titleEl = document.querySelector('.page-title')
         if (titleEl) {
             titleEl.textContent = `${alerts.length} Alert${alerts.length !== 1 ? 's' : ''} !`
@@ -41,8 +41,11 @@ async function loadOperatorAlerts() {
                 ? `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="${iconStroke}" stroke-width="2.5" stroke-linejoin="round"><polygon points="12 2 22 9 18 22 6 22 2 9"></polygon></svg>`
                 : `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="${iconStroke}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg>`
 
+            // NEW: Check if THIS specific operator has read it
+            const hasRead = alertItem.read_by && alertItem.read_by.includes(currentUser.id);
+
             const cardHTML = `
-                <div class="op-alert-card" data-alert-id="${alertItem.id}" onclick="markAlertRead('${alertItem.id}')" style="cursor: pointer; ${alertItem.is_read ? 'opacity: 0.6;' : ''}">
+                <div class="op-alert-card" data-alert-id="${alertItem.id}" onclick="markAlertRead('${alertItem.id}')" style="cursor: pointer; ${hasRead ? 'opacity: 0.6;' : ''}">
                     <div class="alert-header">
                         <div class="alert-header-left">
                             ${iconSVG}

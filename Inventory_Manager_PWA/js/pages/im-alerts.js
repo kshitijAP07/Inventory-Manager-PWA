@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function loadIMAlerts() {
     try {
         const alerts = await IMData.getAlerts('inventory_manager')
+        const currentUser = await IMAuth.getCurrentUser(); // Fetch current user
 
-        // Update title
         const titleEl = document.querySelector('.page-title')
         if (titleEl) {
             titleEl.textContent = `${alerts.length} Alert${alerts.length !== 1 ? 's' : ''} !`
@@ -33,9 +33,12 @@ async function loadIMAlerts() {
             const time = alertItem.created_at
                 ? new Date(alertItem.created_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
                 : ''
+            
+            // Check if THIS specific user has read it
+            const hasRead = alertItem.read_by && alertItem.read_by.includes(currentUser.id);
 
             const cardHTML = `
-                <div class="alert-card" data-alert-id="${alertItem.id}" onclick="markIMAlertRead('${alertItem.id}')" style="cursor: pointer; ${alertItem.is_read ? 'opacity: 0.6;' : ''}">
+                <div class="alert-card" data-alert-id="${alertItem.id}" onclick="markIMAlertRead('${alertItem.id}')" style="cursor: pointer; ${hasRead ? 'opacity: 0.6;' : ''}">
                     <div class="alert-header">
                         <div class="alert-header-left">
                             <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
