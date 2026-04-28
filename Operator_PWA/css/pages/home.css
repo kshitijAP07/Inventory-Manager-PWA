@@ -94,7 +94,6 @@
 .task-row { display: flex; align-items: center; gap: 16px; }
 
 /* Glassmorphism Task Card */
-/* Glassmorphism Task Card */
 .op-task-card {
     flex: 1;
     background-color: rgba(255, 255, 255, 0.25);
@@ -102,33 +101,43 @@
     padding: 16px;
     display: flex;
     justify-content: space-between;
+    align-items: stretch;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative; /* REQUIRED FOR BADGES */
+    position: relative;
+    min-height: 90px;
 }
 
-/* --- NEW STATUS BADGES --- */
+/* Right-side wrapper: badge + action buttons stacked vertically */
+.card-right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 6px;
+    flex-shrink: 0;
+    min-width: 32px;
+}
+
+/* Status Badges — now flow-based, not absolute */
 .card-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
     font-size: 9px;
     font-weight: 700;
-    padding: 4px 8px;
+    padding: 3px 8px;
     border-radius: 12px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 .badge-active { background-color: #00E676; color: #FFFFFF; }
 .badge-hold { background-color: #FF1744; color: #FFFFFF; }
 .badge-paused { background-color: #FFD600; color: #0F0F0F; }
 
-/* ... keep existing .task-info, etc ... */
+/* Orange Play Button */
+.btn-orange { background-color: #E65100; }
 
-/* --- NEW ORANGE PLAY BUTTON --- */
-.btn-orange { background-color: #E65100; } /* Deep orange to contrast with BG */
-
-.task-info { display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+.task-info { display: flex; flex-direction: column; justify-content: center; gap: 6px; flex: 1; min-width: 0; }
 .task-info h4 { font-size: 16px; font-weight: 600; margin: 0; color: #FFFFFF; }
 .task-info p { font-size: 9px; line-height: 1.3; margin: 0; color: rgba(255, 255, 255, 0.8); }
 
@@ -136,9 +145,9 @@
 .avatar-xs { width: 16px; height: 16px; border-radius: 50%; object-fit: cover; }
 .task-assignee span { font-size: 9px; font-weight: 500; color: #FFFFFF; }
 
-.task-actions { display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+.task-actions { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
 
-.btn-action { width: 24px; height: 24px; border-radius: 50%; border: none; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: transform 0.1s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.btn-action { width: 26px; height: 26px; border-radius: 50%; border: none; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: transform 0.1s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); flex-shrink: 0; }
 .btn-action:active { transform: scale(0.92); }
 .btn-action svg { width: 12px; height: 12px; }
 
@@ -146,7 +155,7 @@
 .btn-green { background-color: var(--color-action-green); }
 .btn-red { background-color: var(--color-action-red); }
 
-.task-time-side { font-size: 13px; font-weight: 500; color: #FFFFFF; width: 40px; text-align: left; }
+.task-time-side { font-size: 13px; font-weight: 500; color: #FFFFFF; width: 40px; text-align: left; flex-shrink: 0; }
 
 /* Floating Bottom Nav with Gradient */
 /* Floating Bottom Nav with Gradient */

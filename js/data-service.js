@@ -66,6 +66,16 @@ const IMData = {
         return data || [];
     },
 
+    async getAssemblyLineById(id) {
+        const { data, error } = await _supabase
+            .from('assembly_lines')
+            .select('*')
+            .eq('id', id)
+            .single();
+        if (error) console.error('[IMData] getAssemblyLineById:', error.message);
+        return data;
+    },
+
     // ═══════════════════════════════════════════
     //  TASKS
     // ═══════════════════════════════════════════

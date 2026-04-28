@@ -121,7 +121,6 @@ async function loadOperatorTasks() {
             const taskHTML = `
                 <div class="task-row" data-task-id="${task.id}">
                     <div class="op-task-card">
-                        ${badgeHTML}
                         <div class="task-info">
                             <h4>${task.name}</h4>
                             <p>${task.description || 'No description'}</p>
@@ -130,8 +129,11 @@ async function loadOperatorTasks() {
                                 <span>-${assignerName} assigned you</span>
                             </div>
                         </div>
-                        <div class="task-actions">
-                            ${buttonsHTML}
+                        <div class="card-right-section">
+                            ${badgeHTML}
+                            <div class="task-actions">
+                                ${buttonsHTML}
+                            </div>
                         </div>
                     </div>
                     <span class="task-time-side">${time}</span>
