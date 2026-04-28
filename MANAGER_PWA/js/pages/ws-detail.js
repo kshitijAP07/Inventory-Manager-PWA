@@ -7,7 +7,6 @@
 IMAuth.requireAuth(['manager'], '../index.html')
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // Wire logout
     const logoutBtn = document.getElementById('logoutBtn')
     if (logoutBtn) {
         logoutBtn.addEventListener('click', async () => {
@@ -15,22 +14,25 @@ document.addEventListener('DOMContentLoaded', async () => {
         })
     }
 
-    // Get workstation ID from URL
     const urlParams = new URLSearchParams(window.location.search)
     const wsId = urlParams.get('id')
+    const type = urlParams.get('type') || 'workstation' // Grab the type parameter
 
     if (wsId) {
-        await loadWorkstationDetail(wsId)
-        await loadWorkstationTasks(wsId)
+        await loadWorkstationDetail(wsId, type)
+        await loadWorkstationTasks(wsId, type)
     }
 })
 
-async function loadWorkstationDetail(wsId) {
+async function loadWorkstationDetail(wsId, type) {
     try {
-        const ws = await IMData.getWorkstationById(wsId)
+        // Dynamically fetch from the correct table based on the type
+        const ws = type === 'assembly' 
+            ? await IMData.getAssemblyLineById(wsId) 
+            : await IMData.getWorkstationById(wsId);
+            
         if (!ws) return
 
-        // Update title
         const wsTitle = document.querySelector('.ws-title')
         const wsSubtitle = document.querySelector('.ws-subtitle')
         const statusBadge = document.querySelector('.page-subheader .status-badge')
@@ -52,31 +54,38 @@ async function loadWorkstationDetail(wsId) {
             }
         }
 
-        // Update progress ring
-        const progressRing = document.querySelector('.large-circular-chart .circle.orange-ring')
+        const progressRing = document.querySelector('.large-circular-chart .circle')
         const progressText = document.querySelector('.large-circular-chart .percentage-large')
 
         if (progressRing) {
             progressRing.setAttribute('stroke-dasharray', `${ws.progress}, 100`)
+            // If it's an assembly line, swap the ring color to match the dashboard
+            if (type === 'assembly') {
+                progressRing.classList.remove('orange-ring')
+                progressRing.classList.add('dark-ring')
+            }
         }
         if (progressText) {
             progressText.innerHTML = `${ws.progress}<tspan class="percentage-small">%</tspan>`
         }
     } catch (err) {
-        console.error('[WS Detail] Failed to load workstation:', err)
+        console.error('[WS Detail] Failed to load detail:', err)
     }
 }
 
-async function loadWorkstationTasks(wsId) {
+async function loadWorkstationTasks(wsId, type) {
     try {
-        const tasks = await IMData.getTasks({ workstation_id: wsId })
+        // Filter by either workstation_id or assembly_line_id
+        const filter = type === 'assembly' ? { assembly_line_id: wsId } : { workstation_id: wsId };
+        const tasks = await IMData.getTasks(filter);
+        
         const taskList = document.querySelector('.allotments-list')
         if (!taskList) return
 
         taskList.innerHTML = ''
 
         if (tasks.length === 0) {
-            taskList.innerHTML = '<p style="text-align: center; padding: 20px; color: #999;">No tasks assigned to this workstation.</p>'
+            taskList.innerHTML = `<p style="text-align: center; padding: 20px; color: #999;">No tasks assigned to this ${type}.</p>`
             return
         }
 

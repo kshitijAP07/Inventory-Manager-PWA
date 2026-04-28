@@ -206,9 +206,12 @@ function renderManagerCards(items, sectionTitle, ringClass) {
 
         const isAssembly = ringClass === 'dark-ring';
         const wsIdStyle = isAssembly ? ' style="color: var(--color-text-main);"' : '';
+        // 1. Define the type string for the URL
+        const typeParam = isAssembly ? 'assembly' : 'workstation';
 
+        // 2. Add &type=${typeParam} to the URL
         const cardHTML = `
-            <div class="ws-card" onclick="window.location.href='ws-detail.html?id=${item.id}'" style="cursor: pointer;">
+            <div class="ws-card" onclick="window.location.href='ws-detail.html?id=${item.id}&type=${typeParam}'" style="cursor: pointer;">
                 <div class="ws-card-header">
                     <span class="ws-id"${wsIdStyle}>${item.code}</span>
                     <span class="status-badge ${statusClass}">${statusLabel}</span>

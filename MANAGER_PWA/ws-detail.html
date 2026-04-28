@@ -31,11 +31,11 @@
                 </button>
                 
                 <div class="ws-title-container">
-                    <h2 class="ws-title">WS-01</h2>
-                    <span class="ws-subtitle">Loreum Epsom</span>
+                    <h2 class="ws-title" id="ws-title-display">Loading...</h2>
+                    <span class="ws-subtitle" id="ws-subtitle-display">...</span>
                 </div>
                 
-                <span class="status-badge status-active">Active</span>
+                <span class="status-badge" id="ws-status-badge">...</span>
             </section>
 
             <section class="large-graph-card">
@@ -47,75 +47,8 @@
             </section>
 
             <span class="section-title">Recent Allotments</span>
-            <section class="allotments-list">
-                
-                <div class="task-row">
-                    <div class="task-card-new">
-                        <div class="task-info">
-                            <span class="task-name-new">Task's Name</span>
-                            <span class="task-desc-new">Description Loreum Epsom<br>Description Loreum Epsom</span>
-                            <div class="task-avatars-group">
-                                <img src="assets/lisa.svg" class="task-avatar-small" alt="User">
-                                <img src="assets/lisa.svg" class="task-avatar-small" alt="User">
-                            </div>
-                        </div>
-                        <div class="task-actions">
-                            <button class="action-btn-circle edit-btn" onclick="window.location.href='edit-task.html'">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                            </button>
-                            <button class="action-btn-circle delete-btn">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D32F2F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <span class="task-time-outside">09:30</span>
-                </div>
-
-                <div class="task-row">
-                    <div class="task-card-new">
-                        <div class="task-info">
-                            <span class="task-name-new">Task's Name</span>
-                            <span class="task-desc-new">Description Loreum Epsom<br>Description Loreum Epsom</span>
-                            <div class="task-avatars-group">
-                                <img src="assets/lisa.svg" class="task-avatar-small" alt="User">
-                                <img src="assets/lisa.svg" class="task-avatar-small" alt="User">
-                            </div>
-                        </div>
-                        <div class="task-actions">
-                            <button class="action-btn-circle edit-btn" onclick="window.location.href='edit-task.html'">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                            </button>
-                            <button class="action-btn-circle delete-btn">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D32F2F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <span class="task-time-outside">09:30</span>
-                </div>
-
-                <div class="task-row">
-                    <div class="task-card-new">
-                        <div class="task-info">
-                            <span class="task-name-new">Task's Name</span>
-                            <span class="task-desc-new">Description Loreum Epsom<br>Description Loreum Epsom</span>
-                            <div class="task-avatars-group">
-                                <img src="assets/lisa.svg" class="task-avatar-small" alt="User">
-                                <img src="assets/lisa.svg" class="task-avatar-small" alt="User">
-                            </div>
-                        </div>
-                        <div class="task-actions">
-                            <button class="action-btn-circle edit-btn" onclick="window.location.href='edit-task.html'">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                            </button>
-                            <button class="action-btn-circle delete-btn">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D32F2F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <span class="task-time-outside">09:30</span>
-                </div>
-
-            </section>
+            <section class="allotments-list" id="tasks-list">
+                </section>
         </main>
 
         <nav class="bottom-nav">

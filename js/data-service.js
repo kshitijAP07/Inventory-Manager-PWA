@@ -92,6 +92,7 @@ const IMData = {
             .order('created_at', { ascending: false });
 
         if (filters.workstation_id) query = query.eq('workstation_id', filters.workstation_id);
+        if (filters.assembly_line_id) query = query.eq('assembly_line_id', filters.assembly_line_id);
         if (filters.assigned_to) query = query.eq('assigned_to', filters.assigned_to);
         if (filters.assigned_by) query = query.eq('assigned_by', filters.assigned_by);
         if (filters.status) query = query.eq('status', filters.status);
