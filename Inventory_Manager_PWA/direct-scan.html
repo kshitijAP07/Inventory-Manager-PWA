@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IM - Direct Scan</title>
+    <link rel="stylesheet" href="css/brand.css">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/pages/quick-allot.css">
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body>
+
+    <main class="app-container quick-allot-container">
+        <header class="top-header">
+            <div class="header-left">
+                <div class="header-logo"><a href="im-dashboard.html"><img src="assets/small-logo.svg" alt="Logo" class="logo-img"> <span class="logo-text">IM</span></a></div>
+            </div>
+            <div class="header-right"><img src="assets/bell-icon.svg" alt="Notifications" class="icon-sm" onclick="window.location.href='im-alerts.html'"></div>
+        </header>
+
+        <div class="page-content">
+            <div class="sub-header-left" style="margin-top: 24px;">
+                <div class="back-btn-orange" onclick="window.history.back()">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </div>
+                <h1 class="page-title" id="scan-target-title">Allot Material</h1>
+            </div>
+
+            <div class="scanner-wrapper">
+                <div class="bracket top-left"></div><div class="bracket top-right"></div>
+                <div class="bracket bottom-left"></div><div class="bracket bottom-right"></div>
+                <div id="reader"></div>
+            </div>
+
+            <p class="scan-instructions">Scan the QR label to allot<br>product directly</p>
+
+            <div class="action-buttons">
+                <button class="btn-dark" id="upload-btn">
+                    Upload From Gallery
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                </button>
+                <input type="file" id="qr-upload-input" accept="image/*" style="display: none;">
+                <a href="#" id="add-manually-btn" class="add-manually-link">Add Manually</a>
+            </div>
+            <div style="height: 100px;"></div>
+        </div>
+
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="window.location.href='im-dashboard.html'"><img src="assets/home-icon.svg" alt="Home" style="filter: brightness(0) invert(1);"></div>
+            <div class="nav-item" onclick="window.location.href='quick-allot.html'"><img src="assets/nav-quick-allot.svg" alt="Quick Allot"></div>
+            <div class="nav-item" onclick="window.location.href='scanned-product.html'"><img src="assets/nav-scan-box.svg" alt="Scan"></div>
+            <div class="nav-item" onclick="window.location.href='inventory.html'"><img src="assets/nav-inventory.svg" alt="Inventory"></div>
+        </nav>
+    </main>
+
+    <script src="js/core.js"></script>
+    <script src="js/pages/direct-scan.js"></script>
+</body>
+</html>

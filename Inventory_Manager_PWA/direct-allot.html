@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IM - Create Kit (Step 2)</title>
+    <title>IM - Direct Allot</title>
     <link rel="stylesheet" href="css/brand.css">
     <link rel="stylesheet" href="css/core.css">
     <link rel="stylesheet" href="css/pages/quick-allot.css">
 </head>
 <body>
-
     <main class="app-container quick-allot-container">
         <header class="top-header">
             <div class="header-left"><div class="header-logo"><a href="im-dashboard.html"><img src="assets/small-logo.svg" alt="Logo" class="logo-img"> <span class="logo-text">IM</span></a></div></div>
@@ -17,24 +16,14 @@
         </header>
 
         <div class="page-content">
-            <div class="stepper-wrapper">
-                <div class="stepper-track"><div class="stepper-fill" style="width: 66%;"></div></div>
-                <div class="stepper-nodes">
-                    <div class="step-node active">1</div>
-                    <div class="step-node active">2</div>
-                    <div class="step-node">3</div>
-                </div>
-            </div>
-
-            <div class="sub-header-left">
-                <div class="back-btn-orange" onclick="window.location.href='quick-allot.html'">
+            <div class="sub-header-left" style="margin-top: 24px;">
+                <div class="back-btn-orange" onclick="window.history.back()">
                     <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
                 </div>
-                <h1 class="page-title">Create Kit</h1>
+                <h1 class="page-title" id="direct-title">Allot to...</h1>
             </div>
 
             <form class="allotment-form">
-                
                 <div class="input-group">
                     <select class="custom-input select-input" id="material-select">
                         <option value="" disabled selected>Loading Materials...</option>
@@ -53,7 +42,7 @@
 
                 <div class="scan-prompt">
                     <p>To add more material scan or add manually</p>
-                    <a href="quick-allot.html" class="scan-link">Scan QR Label</a>
+                    <a href="#" id="scan-link" class="scan-link">Scan QR Label</a>
                 </div>
 
                 <div class="kit-items-list" id="kit-items-list">
@@ -72,14 +61,14 @@
                     </div>
                 </div>
 
-                <button type="button" class="btn-primary center-btn" id="next-btn">Next</button>
+                <button type="button" class="btn-primary center-btn" id="confirm-btn">Confirm Allotment</button>
             </form>
             <div style="height: 100px;"></div>
         </div>
 
         <nav class="bottom-nav">
-            <div class="nav-item" onclick="window.location.href='im-dashboard.html'"><img src="assets/home-icon.svg" alt="Home"></div>
-            <div class="nav-item active" onclick="window.location.href='quick-allot.html'"><img src="assets/nav-quick-allot.svg" alt="Quick Allot" style="filter: brightness(0) invert(1);"></div>
+            <div class="nav-item active" onclick="window.location.href='im-dashboard.html'"><img src="assets/home-icon.svg" alt="Home" style="filter: brightness(0) invert(1);"></div>
+            <div class="nav-item" onclick="window.location.href='quick-allot.html'"><img src="assets/nav-quick-allot.svg" alt="Quick Allot"></div>
             <div class="nav-item" onclick="window.location.href='scanned-product.html'"><img src="assets/nav-scan-box.svg" alt="Scan"></div>
             <div class="nav-item" onclick="window.location.href='inventory.html'"><img src="assets/nav-inventory.svg" alt="Inventory"></div>
         </nav>
@@ -90,18 +79,6 @@
     <script src="../js/auth.js"></script>
     <script src="../js/data-service.js"></script>
     <script src="js/core.js"></script>
-    <script src="js/pages/create-kit.js"></script>
-    <script>
-        // Check if we arrived here from a scan and fill out the form block
-        document.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const scannedData = urlParams.get('data');
-            
-            if (scannedData) {
-                document.getElementById('scanned-item-container').style.display = 'flex';
-                document.getElementById('scanned-data-text').innerText = scannedData;
-            }
-        });
-    </script>
+    <script src="js/pages/direct-allot.js"></script>
 </body>
 </html>

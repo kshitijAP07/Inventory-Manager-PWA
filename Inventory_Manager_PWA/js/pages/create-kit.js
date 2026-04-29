@@ -1,43 +1,36 @@
 /**
  * create-kit.js — Inventory Manager Create Kit (Step 2)
- * Features added: Dynamic Stock Validation & Compulsory Fields
  */
 
 IMAuth.requireAuth(['inventory_manager'], '../index.html')
 
-// Store inventory in memory to validate against
 let inventoryStock = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
     await populateMaterialSelect()
 
-    // Wire Next button — override inline onclick
-    const nextBtn = document.querySelector('.btn-primary.center-btn')
+    const nextBtn = document.getElementById('next-btn')
     if (nextBtn) {
-        nextBtn.removeAttribute('onclick')
-        nextBtn.onclick = handleNext
+        nextBtn.addEventListener('click', handleNext)
     }
 
-    // Wire remove buttons for kit items
-    document.querySelectorAll('.remove-kit-item').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const group = e.target.closest('.kit-item-group')
-            if (group) group.style.display = 'none'
-        })
-    })
+    // Check if we arrived here from a scanner
+    const urlParams = new URLSearchParams(window.location.search);
+    const scannedData = urlParams.get('data');
+    if (scannedData) {
+        document.getElementById('scanned-item-container').style.display = 'flex';
+        document.getElementById('scanned-data-text').innerText = scannedData;
+    }
 })
 
 async function populateMaterialSelect() {
     try {
         inventoryStock = await IMData.getInventoryItems()
-        const matSelect = document.querySelector('.allotment-form .select-input')
+        const matSelect = document.getElementById('material-select')
         if (!matSelect) return
 
-        const firstOption = matSelect.querySelector('option[disabled]')
-        matSelect.innerHTML = ''
-        if (firstOption) matSelect.appendChild(firstOption)
+        matSelect.innerHTML = '<option value="" disabled selected>Select Material</option>'
 
-        // Inject the max quantity dynamically into the dataset
         inventoryStock.forEach(item => {
             matSelect.insertAdjacentHTML('beforeend',
                 `<option value="${item.id}" data-name="${item.name}" data-qty="${item.quantity}">${item.name} (${item.quantity} ${item.unit} available)</option>`
@@ -51,43 +44,49 @@ async function populateMaterialSelect() {
 function handleNext() {
     const kitItems = []
 
-    // 1. Compulsory Field: Material Dropdown
-    const matSelect = document.querySelector('.allotment-form .select-input')
-    if (!matSelect || !matSelect.value) {
-        alert("⚠️ Compulsory: Please select a material from the dropdown.")
-        return
-    }
+    // Check Manual Dropdown
+    const matSelect = document.getElementById('material-select')
+    if (matSelect && matSelect.value) {
+        const selectedOption = matSelect.options[matSelect.selectedIndex]
+        const materialId = matSelect.value
+        const materialName = selectedOption.dataset.name
+        const maxQty = parseInt(selectedOption.dataset.qty) || 0
+        
+        const manualQty = parseInt(document.getElementById('manual-qty').value)
+        const manualUnit = document.getElementById('manual-unit').value
 
-    const selectedOption = matSelect.options[matSelect.selectedIndex]
-    const materialId = matSelect.value
-    const materialName = selectedOption.dataset.name
-    const maxAvailableQty = parseInt(selectedOption.dataset.qty) || 0
-
-    // 2. Compulsory Field: Quantity Input
-    const qtyInputs = document.querySelectorAll('.input-qty')
-    let enteredQty = 0;
-    
-    // Grab the first visible quantity input box (matching the UI mockup)
-    for (let input of qtyInputs) {
-        if (input.closest('.kit-item-group').style.display !== 'none') {
-            enteredQty = parseInt(input.value);
-            break; 
+        if (isNaN(manualQty) || manualQty <= 0) {
+            alert(`⚠️ Compulsory: Please enter a valid quantity for ${materialName}.`)
+            return
         }
+        if (manualQty > maxQty) {
+            alert(`❌ Error: Only ${maxQty} units of ${materialName} are available in stock.`)
+            return
+        }
+
+        kitItems.push({ id: materialId, name: materialName, quantity: manualQty, unit: manualUnit })
     }
 
-    if (isNaN(enteredQty) || enteredQty <= 0) {
-        alert(`⚠️ Compulsory: Please enter a valid quantity for ${materialName}.`)
+    // Check Scanned Item
+    const scannedContainer = document.getElementById('scanned-item-container')
+    if (scannedContainer.style.display !== 'none') {
+        const scannedName = document.getElementById('scanned-data-text').innerText
+        const scannedQty = parseInt(document.getElementById('scanned-qty').value)
+        const scannedUnit = document.getElementById('scanned-unit').value
+
+        if (isNaN(scannedQty) || scannedQty <= 0) {
+            alert(`⚠️ Compulsory: Please enter a valid quantity for the scanned item.`)
+            return
+        }
+        // Push scanned item (Note: We use fake ID for raw scanned text, or match it to DB later)
+        kitItems.push({ id: null, name: scannedName, quantity: scannedQty, unit: scannedUnit })
+    }
+
+    if (kitItems.length === 0) {
+        alert("⚠️ Please select a material or scan an item before proceeding.")
         return
     }
 
-    // 3. Instant Stock Validation
-    if (enteredQty > maxAvailableQty) {
-        alert(`❌ Error: Insufficient Stock! You entered ${enteredQty}, but only ${maxAvailableQty} units of ${materialName} are available.`)
-        return
-    }
-
-    // If all validation passes, save to session and proceed
-    kitItems.push({ id: materialId, name: materialName, quantity: enteredQty, unit: 'units' })
     sessionStorage.setItem('im_kit_items', JSON.stringify(kitItems))
     window.location.href = 'allot-kit.html'
 }

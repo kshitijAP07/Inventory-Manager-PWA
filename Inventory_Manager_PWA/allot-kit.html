@@ -35,22 +35,18 @@
 
             <form class="allotment-form">
                 <div class="input-group">
-                    <select class="custom-input select-input">
-                        <option value="ws-01" selected>WS-01</option>
-                        <option value="ws-02">WS-02</option>
+                    <select class="custom-input select-input" id="workstation-select">
+                        <option value="" disabled selected>Select Workstation / Assembly</option>
                     </select>
                 </div>
 
                 <div class="input-group">
-                    <select class="custom-input select-input">
+                    <select class="custom-input select-input" id="operator-select">
                         <option value="" disabled selected>Select Operator</option>
-                        <option value="op-1">Lisa</option>
-                        <option value="op-2">John</option>
-                        <option value="op-3">Om</option>
                     </select>
                 </div>
 
-                <button type="button" class="btn-primary center-btn" onclick="confirmAllot()">Confirm</button>
+                <button type="button" class="btn-primary center-btn" id="confirm-allot-btn">Confirm</button>
             </form>
             <div style="height: 100px;"></div>
         </div>

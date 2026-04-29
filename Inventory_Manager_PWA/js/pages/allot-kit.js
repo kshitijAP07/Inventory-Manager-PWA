@@ -19,24 +19,27 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function populateWorkstationSelect() {
     try {
         const workstations = await IMData.getWorkstations()
-        const selects = document.querySelectorAll('.allotment-form .select-input')
-        const wsSelect = selects[0]
+        const assemblyLines = await IMData.getAssemblyLines() // FETCH BOTH!
+        
+        const wsSelect = document.querySelectorAll('.allotment-form .select-input')[0]
         if (!wsSelect) return
 
-        wsSelect.innerHTML = '<option value="" disabled selected hidden>Select Workstation</option>'
+        wsSelect.innerHTML = '<option value="" disabled selected hidden>Select Workstation / Assembly</option>'
+        
         workstations.forEach(ws => {
-            wsSelect.insertAdjacentHTML('beforeend',
-                `<option value="${ws.id}">${ws.code} — ${ws.name}</option>`
-            )
+            wsSelect.insertAdjacentHTML('beforeend', `<option value="${ws.id}" data-type="workstation">WS: ${ws.code} — ${ws.name}</option>`)
+        })
+        assemblyLines.forEach(al => {
+            wsSelect.insertAdjacentHTML('beforeend', `<option value="${al.id}" data-type="assembly">AS: ${al.code} — ${al.name}</option>`)
         })
 
-        // LIVE FILTERING: Listen for Workstation changes to load the correct operator
+        // Pass the TYPE to the operator fetcher
         wsSelect.addEventListener('change', async (e) => {
-            await populateOperatorForStation(e.target.value)
+            const type = wsSelect.options[wsSelect.selectedIndex].getAttribute('data-type');
+            await populateOperatorForStation(e.target.value, type);
         })
-
     } catch (err) {
-        console.error('[Allot Kit] Failed to load workstations:', err)
+        console.error('[Allot Kit] Failed to load stations:', err)
     }
 }
 

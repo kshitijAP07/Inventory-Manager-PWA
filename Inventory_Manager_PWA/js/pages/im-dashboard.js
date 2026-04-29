@@ -107,10 +107,15 @@ function renderCards(data, sectionTitleText) {
         }
 
         // Calculate progress ring degrees (100% = 360deg)
+        // Calculate progress ring degrees (100% = 360deg)
         const progressDeg = (item.progress / 100) * 360;
 
+        // Determine if this is an Assembly line or Workstation
+        const typeParam = sectionTitleText.toLowerCase() === 'assembly line' ? 'assembly' : 'workstation';
+
+        // ADDED: &type=${typeParam} to the URL!
         const cardHTML = `
-            <div class="ws-card" onclick="window.location.href='ws-detail.html?id=${item.id}'" style="cursor: pointer;">
+            <div class="ws-card" onclick="window.location.href='ws-detail.html?id=${item.id}&type=${typeParam}'" style="cursor: pointer;">
                 <div class="card-header">
                     <span class="card-id">${item.code}</span>
                     <span class="status-badge ${statusClass}">${statusLabel}</span>
