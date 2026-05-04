@@ -62,4 +62,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 5. Notes
     document.getElementById('det-notes').textContent = item.storage_notes || 'No specific storage notes available.';
+// 6. Wire up Edit Button
+    const editBtn = document.getElementById('btn-edit-item');
+    if (editBtn) {
+        editBtn.addEventListener('click', () => {
+            window.location.href = `edit-location.html?id=${itemId}`;
+        });
+    }
 });

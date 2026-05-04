@@ -46,6 +46,7 @@
 .page-title { color: var(--color-primary); font-size: 18px; font-weight: 800; margin-bottom: 16px; }
 
 /* Search Bar Area */
+/* Search Bar Area */
 .search-bar-row { display: flex; gap: 12px; margin-bottom: 12px; }
 .search-input-container {
     flex: 1;
@@ -76,19 +77,74 @@
     align-items: center;
     cursor: pointer;
     color: var(--color-text-main);
+    transition: background-color 0.2s ease;
+}
+.filter-btn-square:active {
+    background-color: #DDDDDD;
 }
 
-/* Filter Pill */
-.active-filters { margin-bottom: 16px; display: flex; }
+/* Advanced Filters Panel */
+#advanced-filters-panel {
+    background-color: #EEEEEE; 
+    padding: 16px; 
+    border-radius: 12px; 
+    margin-bottom: 16px; 
+    display: flex; /* Toggled via JS */
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+#advanced-filters-panel .select-input {
+    width: 100%;
+    background-color: #FFFFFF;
+    color: var(--color-text-main);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid #E0E0E0;
+    outline: none;
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23A0A0A0%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px auto;
+}
+
+/* Quick Filter Pills (Horizontal Scrollable) */
+.active-filters { 
+    margin-bottom: 16px; 
+    display: flex; 
+    gap: 8px; 
+    overflow-x: auto; 
+    padding-bottom: 4px; /* Room for scroll */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.active-filters::-webkit-scrollbar {
+    display: none;
+}
+
 .filter-pill-orange {
     background-color: var(--color-primary);
     color: #FFFFFF;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 12px;
+    padding: 6px 14px;
+    border-radius: 16px;
     display: inline-flex;
     align-items: center;
+    flex-shrink: 0; /* Prevents squishing on small screens */
+    cursor: pointer;
+    border: 1px solid var(--color-primary);
+    transition: all 0.2s ease;
+}
+.filter-pill-orange:not(.active) {
+    background-color: #FFFFFF;
+    color: var(--color-primary);
 }
 
 /* VIEW 1: LOCATION GRID */

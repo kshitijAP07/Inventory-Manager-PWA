@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IM - Edit Location</title>
+    
+    <link rel="stylesheet" href="css/brand.css">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/pages/scanned-product.css">
+    <link rel="stylesheet" href="css/pages/add-product.css">
+    
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <style>
+        #manual-section { width: 100%; display: none; }
+        #scanner-section { width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .sub-header { width: 100%; justify-content: flex-start; position: relative; margin-bottom: 24px; margin-top: 16px;}
+        .sub-header .page-title { margin: 0 auto; align-self: center; }
+        
+        /* Danger button styles for Delete */
+        .btn-danger {
+            background-color: transparent;
+            color: #D32F2F;
+            font-weight: 600;
+            border-radius: 24px;
+            border: 1px solid #D32F2F;
+            cursor: pointer;
+            padding: 14px 24px;
+            font-size: 14px;
+            width: 100%;
+            margin-top: 8px;
+            transition: background-color 0.2s ease;
+        }
+        .btn-danger:active { background-color: #ffebee; }
+    </style>
+</head>
+<body>
+
+    <main class="app-container scanned-product-container">
+        
+        <header class="top-header">
+            <div class="header-left">
+                <div class="header-logo"><a href="im-dashboard.html"><img src="assets/small-logo.svg" alt="Logo" class="logo-img"> <span class="logo-text">IM</span></a></div>
+            </div>
+            <div class="header-right"><img src="assets/bell-icon.svg" alt="Notifications" class="icon-sm" onclick="window.location.href='im-alerts.html'"></div>
+        </header>
+
+        <div class="page-content">
+            
+            <div class="sub-header">
+                <div class="back-btn" onclick="window.history.back()">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </div>
+                <h1 class="page-title" id="page-title">Update Location</h1>
+            </div>
+
+            <!-- SCANNER UI (Default View) -->
+            <div id="scanner-section">
+                <div class="scanner-wrapper">
+                    <div class="bracket top-left"></div><div class="bracket top-right"></div>
+                    <div class="bracket bottom-left"></div><div class="bracket bottom-right"></div>
+                    <div id="reader"></div>
+                </div>
+
+                <p class="scan-instructions">Scan the new Shelf QR to<br>update storage location</p>
+
+                <div class="action-buttons">
+                    <button class="btn-dark" id="upload-btn">
+                        Upload From Gallery
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    </button>
+                    <input type="file" id="qr-upload-input" accept="image/*" style="display: none;">
+                    <a href="#" id="toggle-manual-btn" class="add-manually-link">Update Manually</a>
+                </div>
+            </div>
+
+            <!-- MANUAL ENTRY UI (Hidden by Default) -->
+            <div id="manual-section">
+                <form class="product-form">
+                    
+                    <select id="rack-select" class="custom-input select-input">
+                        <option value="" disabled selected>Rack Number (1-8)</option>
+                        <option value="1">Rack 1</option>
+                        <option value="2">Rack 2</option>
+                        <option value="3">Rack 3</option>
+                        <option value="4">Rack 4</option>
+                        <option value="5">Rack 5</option>
+                        <option value="6">Rack 6</option>
+                        <option value="7">Rack 7</option>
+                        <option value="8">Rack 8</option>
+                    </select>
+
+                    <select id="shelf-select" class="custom-input select-input">
+                        <option value="" disabled selected>Shelf Number (1-5)</option>
+                        <option value="1">Shelf 1</option>
+                        <option value="2">Shelf 2</option>
+                        <option value="3">Shelf 3</option>
+                        <option value="4">Shelf 4</option>
+                        <option value="5">Shelf 5</option>
+                    </select>
+
+                    <select id="position-select" class="custom-input select-input">
+                        <option value="" disabled selected>Position Number (1-4)</option>
+                        <option value="1">Position 1</option>
+                        <option value="2">Position 2</option>
+                        <option value="3">Position 3</option>
+                        <option value="4">Position 4</option>
+                    </select>
+
+                    <!-- Update Location Button -->
+                    <button type="button" class="btn-primary" id="confirm-manual-btn" style="width: 100%; margin-bottom: 8px;">Update Storage Location</button>
+                    
+                    <!-- DANGER: Delete Stock Button -->
+                    <button type="button" class="btn-danger" id="delete-stock-btn">Delete Stock / Expired</button>
+                    
+                    <div style="text-align: center; margin-top: 24px;">
+                        <a href="#" id="toggle-scanner-btn" class="add-manually-link">Back to Scanner</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="footer-copy">IM@2026</div>
+            <div style="height: 100px;"></div>
+        </div>
+
+        <nav class="bottom-nav">
+            <div class="nav-item" onclick="window.location.href='im-dashboard.html'"><img src="assets/home-icon.svg" alt="Home"></div>
+            <div class="nav-item" onclick="window.location.href='quick-allot.html'"><img src="assets/nav-quick-allot.svg" alt="Quick Allot"></div>
+            <div class="nav-item" onclick="window.location.href='scanned-product.html'"><img src="assets/nav-scan-box.svg" alt="Scan"></div>
+            <!-- INVENTORY ICON IS ACTIVE -->
+            <div class="nav-item active" onclick="window.location.href='inventory.html'">
+                <img src="assets/nav-inventory.svg" alt="Inventory" style="filter: brightness(0) invert(1);">
+            </div>
+        </nav>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/data-service.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/pages/edit-location.js"></script>
+</body>
+</html>

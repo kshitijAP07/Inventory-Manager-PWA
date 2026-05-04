@@ -6,7 +6,6 @@
 
 IMAuth.requireAuth(['manager'], '../index.html')
 
-// Current mode: 'ws' or 'al'
 let currentMode = 'ws'
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -26,9 +25,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Re-populate station dropdown
             await populateStationSelect()
-            // Re-populate operator dropdown (same operators from DB)
-            await populateOperatorSelect()
-            // Re-load recent allotments filtered by mode
+            
+            // Reset operator dropdown to prompt user
+            const opSelect = document.getElementById('operatorSelect')
+            if (opSelect) opSelect.innerHTML = '<option value="" disabled selected hidden>Select Station First</option>'
+            
+            // Re-load recent allotments
             if (user) await loadRecentAllotments(user.id)
 
             // Update submit button text
@@ -41,8 +43,21 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- Initial Load ---
     await populateStationSelect()
-    await populateOperatorSelect()
+    
+    // Set default empty state for operators
+    const opSelect = document.getElementById('operatorSelect')
+    if (opSelect) opSelect.innerHTML = '<option value="" disabled selected hidden>Select Station First</option>'
     if (user) await loadRecentAllotments(user.id)
+
+    // --- NEW: Listen for Station Change to filter Operators! ---
+    const stationSelect = document.getElementById('stationSelect')
+    if (stationSelect) {
+        stationSelect.addEventListener('change', async (e) => {
+            // Get the text of the selected option (e.g., "WS-02" or "AS-01")
+            const stationCode = e.target.options[e.target.selectedIndex].text;
+            await populateOperatorSelect(stationCode);
+        })
+    }
 
     // --- Wire submit button ---
     const submitBtn = document.getElementById('submitBtn')
@@ -54,7 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 // ═══════════════════════════════════════════
-//  POPULATE STATION DROPDOWN (WS or AL)
+//  POPULATE STATION DROPDOWN
 // ═══════════════════════════════════════════
 
 async function populateStationSelect() {
@@ -62,45 +77,54 @@ async function populateStationSelect() {
     if (!stationSelect) return
 
     if (currentMode === 'ws') {
-        // Fetch workstations from DB
         const workstations = await IMData.getWorkstations()
         stationSelect.innerHTML = '<option value="" disabled selected hidden>Select Workstation</option>'
         workstations.forEach(ws => {
-            stationSelect.insertAdjacentHTML('beforeend',
-                `<option value="${ws.id}">${ws.code}</option>`
-            )
+            stationSelect.insertAdjacentHTML('beforeend', `<option value="${ws.id}">${ws.code}</option>`)
         })
     } else {
-        // Fetch assembly lines from DB
         const assemblyLines = await IMData.getAssemblyLines()
         stationSelect.innerHTML = '<option value="" disabled selected hidden>Select Assembly Line</option>'
         assemblyLines.forEach(al => {
-            stationSelect.insertAdjacentHTML('beforeend',
-                `<option value="${al.id}">${al.code}</option>`
-            )
+            stationSelect.insertAdjacentHTML('beforeend', `<option value="${al.id}">${al.code}</option>`)
         })
     }
 }
 
 // ═══════════════════════════════════════════
-//  POPULATE OPERATOR DROPDOWN
+//  POPULATE & FILTER OPERATOR DROPDOWN
 // ═══════════════════════════════════════════
 
-async function populateOperatorSelect() {
+async function populateOperatorSelect(stationCode) {
     const opSelect = document.getElementById('operatorSelect')
     if (!opSelect) return
 
+    opSelect.innerHTML = '<option value="" disabled selected hidden>Scanning assignments...</option>'
+
+    // Fetch all operators
     const operators = await IMData.getOperators()
+
+    // Filter operators to only those assigned to THIS specific station
+    const assignedOperators = operators.filter(op => op.metadata?.assigned_station === stationCode)
+
+    if (assignedOperators.length === 0) {
+        opSelect.innerHTML = '<option value="" disabled selected>No operator assigned</option>'
+        return
+    }
+
     opSelect.innerHTML = '<option value="" disabled selected hidden>Select Operator</option>'
-    operators.forEach(op => {
-        opSelect.insertAdjacentHTML('beforeend',
-            `<option value="${op.id}">${op.display_name}</option>`
-        )
+    assignedOperators.forEach(op => {
+        opSelect.insertAdjacentHTML('beforeend', `<option value="${op.id}">${op.display_name}</option>`)
     })
+
+    // UX Bonus: If there is exactly 1 operator at the station, auto-select them!
+    if (assignedOperators.length === 1) {
+        opSelect.value = assignedOperators[0].id
+    }
 }
 
 // ═══════════════════════════════════════════
-//  CREATE TASK (WS or AL)
+//  CREATE TASK
 // ═══════════════════════════════════════════
 
 async function handleCreateTask(user) {
@@ -124,7 +148,6 @@ async function handleCreateTask(user) {
         return
     }
 
-    // Build task data differently for WS vs AL
     const taskData = {
         name: taskName,
         description: description || '',
@@ -136,38 +159,34 @@ async function handleCreateTask(user) {
     }
 
     if (currentMode === 'ws') {
-        // Workstation task — use workstation_id FK directly
         taskData.workstation_id = stationId
         taskData.metadata = { station_type: 'workstation' }
     } else {
-        // Assembly line task — store in metadata (no FK to assembly_lines on tasks table)
         taskData.workstation_id = null
-        taskData.metadata = {
-            station_type: 'assembly_line',
-            assembly_line_id: stationId
-        }
+        taskData.metadata = { station_type: 'assembly_line', assembly_line_id: stationId }
     }
 
-    const { data, error } = await IMData.createTask(taskData)
+    const { error } = await IMData.createTask(taskData)
 
     if (error) {
         alert('Failed to create task: ' + error.message)
     } else {
-        alert('Task allotted successfully!')
-        // Reset form
+        alert('✅ Task allotted successfully!')
         if (taskInput) taskInput.value = ''
         if (descInput) descInput.value = ''
         if (stationSelect) stationSelect.selectedIndex = 0
-        if (operatorSelect) operatorSelect.selectedIndex = 0
+        
+        // Reset operator to empty state
+        if (operatorSelect) operatorSelect.innerHTML = '<option value="" disabled selected hidden>Select Station First</option>'
+        
         if (hoursSelect) hoursSelect.selectedIndex = 0
         if (minutesSelect) minutesSelect.selectedIndex = 0
-        // Reload recent allotments
         if (user) await loadRecentAllotments(user.id)
     }
 }
 
 // ═══════════════════════════════════════════
-//  LOAD RECENT ALLOTMENTS (filtered by mode)
+//  LOAD RECENT ALLOTMENTS
 // ═══════════════════════════════════════════
 
 async function loadRecentAllotments(managerId) {
@@ -175,22 +194,13 @@ async function loadRecentAllotments(managerId) {
     const taskList = document.querySelector('.allotments-list')
     if (!taskList) return
 
-    // Filter tasks based on current toggle mode
     const filtered = tasks.filter(task => {
         const stationType = task.metadata?.station_type
-        if (currentMode === 'ws') {
-            // Show WS tasks: either has workstation_id and no assembly_line metadata,
-            // or explicitly marked as workstation
-            return stationType === 'workstation' || (!stationType && task.workstation_id)
-        } else {
-            // Show AL tasks: explicitly marked as assembly_line
-            return stationType === 'assembly_line'
-        }
+        if (currentMode === 'ws') return stationType === 'workstation' || (!stationType && task.workstation_id)
+        else return stationType === 'assembly_line'
     })
 
-    // Limit to 5 after filtering
     const display = filtered.slice(0, 5)
-
     taskList.innerHTML = ''
 
     if (display.length === 0) {
@@ -201,29 +211,20 @@ async function loadRecentAllotments(managerId) {
 
     for (const task of display) {
         let stationCode = 'N/A'
-
         if (currentMode === 'ws') {
             stationCode = task.workstation?.code || 'N/A'
         } else {
-            // For AL tasks, fetch the assembly line code from metadata
             const alId = task.metadata?.assembly_line_id
             if (alId) {
                 try {
                     const al = await IMData.getAssemblyLineById(alId)
                     stationCode = al?.code || 'AL'
-                } catch (e) {
-                    stationCode = 'AL'
-                }
+                } catch (e) { stationCode = 'AL' }
             }
         }
 
-        const time = task.scheduled_time
-            ? new Date(task.scheduled_time).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
-            : '--:--'
-
-        const avatarHTML = task.assignee
-            ? `<img src="assets/lisa.svg" class="task-avatar-small" alt="${task.assignee.display_name}">`
-            : ''
+        const time = task.scheduled_time ? new Date(task.scheduled_time).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }) : '--:--'
+        const avatarHTML = task.assignee ? `<img src="assets/lisa.svg" class="task-avatar-small" alt="${task.assignee.display_name}">` : ''
 
         const taskHTML = `
             <div class="task-row">
@@ -231,9 +232,7 @@ async function loadRecentAllotments(managerId) {
                     <div class="task-info">
                         <span class="task-name-new">${task.name}</span>
                         <span class="task-desc-new">${task.description || 'No description'}</span>
-                        <div class="task-avatars-group">
-                            ${avatarHTML}
-                        </div>
+                        <div class="task-avatars-group">${avatarHTML}</div>
                     </div>
                     <div class="task-actions">
                         <span class="task-id-badge">${stationCode}</span>
@@ -255,9 +254,8 @@ async function loadRecentAllotments(managerId) {
 async function deleteRecentTask(taskId) {
     if (!confirm('Are you sure you want to delete this task?')) return
     const { error } = await IMData.deleteTask(taskId)
-    if (error) {
-        alert('Failed to delete task: ' + error.message)
-    } else {
+    if (error) alert('Failed to delete task: ' + error.message)
+    else {
         const user = await IMAuth.getCurrentUser()
         if (user) await loadRecentAllotments(user.id)
     }

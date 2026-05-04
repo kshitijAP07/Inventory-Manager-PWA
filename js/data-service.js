@@ -241,6 +241,15 @@ const IMData = {
         return { data, error };
     },
 
+    async deleteInventoryItem(itemId) {
+        const { data, error } = await _supabase
+            .from('inventory')
+            .delete()
+            .eq('id', itemId);
+        if (error) console.error('[IMData] deleteInventoryItem:', error.message);
+        return { data, error };
+    },
+
     // ═══════════════════════════════════════════
     //  OPERATORS (users with role='operator')
     // ═══════════════════════════════════════════
