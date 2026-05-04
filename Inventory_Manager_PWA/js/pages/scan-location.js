@@ -145,6 +145,19 @@ async function saveToDatabase(locCode, rack, shelf, position) {
     } else {
         if (html5QrCode && html5QrCode.isScanning) await html5QrCode.stop();
         sessionStorage.removeItem('pending_inventory_item');
+
+        // 🔗 Notify the Digital Twin Viewer (awaited so message is sent before navigation)
+        if (typeof window.sendToTwin === 'function') {
+            await window.sendToTwin({
+                itemId:       data?.id    || 'unknown',
+                itemName:     pendingItem.name || 'Unknown Item',
+                locationCode: locCode,
+                rack,
+                shelf,
+                position,
+            });
+        }
+
         alert(`✅ Product logged to ${locCode}`);
         window.location.href = 'inventory.html';
     }

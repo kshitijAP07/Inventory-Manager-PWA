@@ -1,0 +1,13 @@
+{
+  "name": "inventory-manager-pwa",
+  "version": "1.0.0",
+  "description": "Inventory Manager PWA with Digital Twin integration",
+  "scripts": {
+    "twin-server": "node ws-server.js",
+    "serve": "npx serve .",
+    "start": "node ws-server.js"
+  },
+  "dependencies": {
+    "ws": "^8.20.0"
+  }
+}

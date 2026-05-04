@@ -4,15 +4,144 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3D Model Viewer</title>
-  <meta name="description" content="Interactive 3D GLB model viewer with item selection" />
+  <title>Digital Twin — Inventory Viewer</title>
+  <meta name="description" content="Real-time 3D Digital Twin viewer for the Inventory Manager PWA. Watch products appear in 3D as they are added to the warehouse." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./src/styles/main.css" />
+
+  <style>
+    /* ── WebSocket status indicator ── */
+    #ws-status {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 15, 20, 0.82);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      padding: 6px 14px 6px 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.75);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .ws-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .ws-dot.ws-connected    { background: #22c55e; box-shadow: 0 0 6px #22c55e; }
+    .ws-dot.ws-disconnected { background: #ef4444; box-shadow: 0 0 6px #ef4444; }
+
+    /* ── HUD Notification card ── */
+    #hud-notification {
+      position: fixed;
+      bottom: 32px;
+      right: 24px;
+      min-width: 240px;
+      max-width: 320px;
+      background: rgba(12, 12, 18, 0.90);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(99, 179, 237, 0.35);
+      border-radius: 16px;
+      padding: 16px 20px;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,179,237,0.1);
+      z-index: 9999;
+
+      /* Hidden by default */
+      opacity: 0;
+      transform: translateY(16px) scale(0.96);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    #hud-notification.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    #hud-notification .hud-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #63b3ed;
+      margin-bottom: 10px;
+    }
+
+    #hud-notification .hud-badge::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #63b3ed;
+      animation: hudPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes hudPulse {
+      0%, 100% { opacity: 1; transform: scale(1);   }
+      50%       { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    #hud-notification .hud-item-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #f0f4ff;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #hud-notification .hud-location {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.45);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    #hud-notification .hud-progress {
+      margin-top: 12px;
+      height: 2px;
+      border-radius: 99px;
+      background: rgba(99,179,237,0.15);
+      overflow: hidden;
+    }
+
+    #hud-notification.visible .hud-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #63b3ed, #4299e1);
+      border-radius: 99px;
+      animation: hudCountdown 5s linear forwards;
+    }
+
+    @keyframes hudCountdown {
+      from { width: 100%; }
+      to   { width: 0%;   }
+    }
+  </style>
 </head>
 
 <body>
 
+  <!-- Loading overlay -->
   <div id="loader">
     <span id="loader-text">Loading model…</span>
     <div id="loader-bar-wrap">
@@ -20,6 +149,13 @@
     </div>
   </div>
 
+  <!-- WebSocket status pill -->
+  <div id="ws-status">
+    <span class="ws-dot ws-disconnected" id="ws-dot"></span>
+    <span id="ws-label">Twin Offline</span>
+  </div>
+
+  <!-- Controls hint -->
   <div id="ui">
     <span>🖱</span> Left drag — rotate<br>
     <span>🖱</span> Right drag — pan<br>
@@ -28,12 +164,14 @@
     <span>👆</span> Click item — show ID
   </div>
 
+  <!-- Mesh info panel -->
   <div id="info-panel">
     <div class="label">Item ID</div>
     <div class="item-id" id="item-id-text">—</div>
     <div class="item-type" id="item-type-text"></div>
   </div>
 
+  <!-- Wireframe toggle -->
   <div id="wireframe-toggle">
     <span>Wireframe</span>
     <div class="toggle-track" id="wireframe-track">
@@ -41,8 +179,10 @@
     </div>
   </div>
 
+  <!-- Move Item button -->
   <button id="move-item-btn">⇄ Move Item</button>
 
+  <!-- Move Item panel -->
   <div id="move-panel">
     <div class="panel-title">Move Item</div>
     <label for="mesh-select">Target Item</label>
@@ -66,6 +206,19 @@
     <button id="move-apply-btn">Apply Position</button>
   </div>
 
+  <!-- HUD: Product-added notification -->
+  <div id="hud-notification" role="status" aria-live="polite">
+    <div class="hud-badge">Product Placed</div>
+    <div class="hud-item-name" id="hud-item-name">—</div>
+    <div class="hud-location">
+      <span>📍</span>
+      <span id="hud-location">—</span>
+    </div>
+    <div class="hud-progress">
+      <div class="hud-progress-bar"></div>
+    </div>
+  </div>
+
   <script type="importmap">
   {
     "imports": {
@@ -74,6 +227,10 @@
     }
   }
   </script>
+
+  <!-- Supabase SDK + config (same as PWA pages — shares auth session via localStorage) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./js/supabase-config.js"></script>
 
   <script type="module" src="./twin-app.js"></script>
 

@@ -4,7 +4,7 @@
  * and a Cache-First strategy for static assets (CSS, JS, images, fonts).
  */
 
-const CACHE_NAME = 'im-pwa-cache-v1';
+const CACHE_NAME = 'im-pwa-cache-v2';
 
 // Core shell files to pre-cache on install
 // Core shell files to pre-cache on install

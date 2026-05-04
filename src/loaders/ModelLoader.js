@@ -7,12 +7,37 @@ import { scene } from '../core/scene.js'
 export const originalMats = new Map();
 export const clickableMeshes = [];
 
-export function loadModel(GLB_FILE) {
+/** Shared DRACO + GLTF loader instance */
+function makeGLTFLoader() {
   const dracoLoader = new DRACOLoader()
   dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/')
-
   const gltfLoader = new GLTFLoader()
   gltfLoader.setDRACOLoader(dracoLoader)
+  return gltfLoader
+}
+
+/**
+ * loadGLB — generic, silent GLB loader. Returns a Promise<THREE.Group>.
+ * Does NOT touch loader UI elements or clickableMeshes.
+ * Used for secondary models (e.g. blueCret.glb).
+ * @param {string} url
+ * @returns {Promise<THREE.Group>}
+ */
+export function loadGLB(url) {
+  const loader = makeGLTFLoader()
+  return new Promise((resolve, reject) => {
+    loader.load(url, (gltf) => resolve(gltf.scene), undefined, reject)
+  })
+}
+
+/**
+ * loadModel — loads the primary warehouse GLB, registers clickable meshes,
+ * auto-scales + centers the model, and updates the loader progress bar UI.
+ * @param {string} GLB_FILE
+ * @returns {Promise<import('three/examples/jsm/loaders/GLTFLoader.js').GLTF>}
+ */
+export function loadModel(GLB_FILE) {
+  const gltfLoader = makeGLTFLoader()
 
   const loaderEl = document.getElementById('loader')
   const loaderBar = document.getElementById('loader-bar')
@@ -72,3 +97,4 @@ export function loadModel(GLB_FILE) {
     )
   })
 }
+
